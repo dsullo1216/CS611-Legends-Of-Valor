@@ -1,10 +1,15 @@
 import java.io.IOException;
-import java.util.Scanner;
+import java.util.*;
 
 public class LegendsOfValorGame extends RPGGame {
 
+    private HashMap<Integer, int[]> nexusSpawns;
+
     public LegendsOfValorGame() throws IOException {
         this.map = new LegendsOfValorMap();
+        nexusSpawns.put(Integer.valueOf(0), new int[] {0,7});
+        nexusSpawns.put(Integer.valueOf(1), new int[] {3,7});
+        nexusSpawns.put(Integer.valueOf(2), new int[] {5,7});
     }
 
     public void printHelpMessages() {
@@ -23,7 +28,7 @@ public class LegendsOfValorGame extends RPGGame {
     public int processMapInput(Scanner sc) {
         System.out.print("What would you like to do? Remember you can press 'h' to display the rules and list of controls again: ");
         char choice = Character.toLowerCase(sc.next().charAt(0));
-        int[] currPosition = map.getHeroSquadPosition();
+        int[] currPosition = map.getHeroSquadPosition(); // TODO Handle Unique Hero rather than squad
         switch (choice) {
             case ('w'): {
                 int[] newPosition = new int[] {currPosition[0]-1, currPosition[1]};
@@ -83,15 +88,20 @@ public class LegendsOfValorGame extends RPGGame {
         return -1;
     }
 
+    public int returnToNexus (int heroIndex) {
+        return moveSquad(nexusSpawns.get(Integer.valueOf(heroIndex)));
+    }
+
     @Override
     public void playGame(Scanner sc) throws IOException {
         System.out.println("PLEASE CHOOSE 3 CHAMPIONS WHEN STARTING THE GAME IN ORDER TO PROPERLY RUN");
         launchGame(sc, "Legends of Valor");
         while (true) {
+            // TODO Here to add a for loop iterating through the array of Heros 
             int choice = processMapInput(sc);
             switch (choice) {
                 case (3): {
-                    MarketUI marketWindow = new MarketUI(party, (MarketCell) map.getCell(map.getHeroSquadPosition()));
+                    MarketUI marketWindow = new MarketUI(party, (MarketCell) map.getCell(map.getHeroSquadPosition())); // TODO Handle Unique Hero rather than squad
                     marketWindow.launchInterface(sc);
                     break;
                 }
@@ -116,7 +126,8 @@ public class LegendsOfValorGame extends RPGGame {
                     break;
                 }
                 case (9): {
-                    // TODO Add return to nexus
+                    int heroIndex = 0;
+                    returnToNexus(heroIndex);
                     break;
                 }
                 default: {
