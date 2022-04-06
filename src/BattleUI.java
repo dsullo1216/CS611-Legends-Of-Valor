@@ -18,6 +18,15 @@ public class BattleUI extends UserInterface {
 
     }
 
+    public BattleUI(Hero currHero, Monster currMonster) {
+        this.party = new HeroSquad(1);
+        this.hoard = new MonsterSquad(1);
+        party.addEntity(currHero);
+        hoard.addEntity(currMonster);
+        this.currHero = (Hero) party.getEntityAt(0);
+        this.currMonster = (Monster) hoard.getEntityAt(0);
+    }
+
     private int chooseSpell(Scanner sc) {
         Inventory currInventory = currHero.getInventory();
         Inventory spellInventory = new Inventory(currInventory.size());
