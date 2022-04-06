@@ -24,9 +24,20 @@ public class LegendsOfValorMap implements Map {
         
     }
 
-    public int[] getHeroPosition(Hero hero) {
-        // TODO Auto-generated method stub
-        return null;
+    public int[] getHeroPosition(int heroIndex) {
+        return currPositions.get(heroIndex);
+    }
+
+    public int getLane(int col) {
+        if (col < 2) {
+            return 0;
+        }
+        else if (col < 5) {
+            return 1;
+        }
+        else {
+            return 2;
+        }
     }
 
     @Override
