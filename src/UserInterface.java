@@ -8,7 +8,7 @@ public abstract class UserInterface {
     
     public abstract int chooseAction(Scanner sc);
 
-    public abstract void launchInterface(Scanner sc) throws IOException;
+    public abstract boolean launchInterface(Scanner sc) throws IOException;
 
     public Hero chooseHero(Scanner sc) {
         System.out.println("Please select which hero's inventory you would like to manage by entering the number next to their name:");

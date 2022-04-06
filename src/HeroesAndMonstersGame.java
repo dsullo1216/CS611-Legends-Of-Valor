@@ -97,7 +97,9 @@ public class HeroesAndMonstersGame extends RPGGame {
             switch (choice) {
                 case (2): {
                     BattleUI battleWindow = new BattleUI(party);
-                    battleWindow.launchInterface(sc);
+                    if (!battleWindow.launchInterface(sc)) {
+                        return;
+                    }
                     break;
                 }
                 case (3): {

@@ -257,7 +257,7 @@ public class BattleUI extends UserInterface {
     }
 
     @Override
-    public void launchInterface(Scanner sc) throws IOException {
+    public boolean launchInterface(Scanner sc) throws IOException {
         System.out.println("You have encounter a hoarde of monsters! Be prepared to fight them!");
         boolean finished = false;
         while (!finished) {
@@ -269,17 +269,19 @@ public class BattleUI extends UserInterface {
             if (battleOperations(sc)) {
                 if (!nextMonster()) {
                     finished = true;
+                    return finishBattle(true);
                 }
             }
 
             if (attackHero()) {
                 if (!nextHero()) {
                     finished = true;
+                    return finishBattle(false);
                 }
             }
 
         }
-        
+        return finished;
     }
     
 }

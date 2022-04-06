@@ -135,7 +135,7 @@ public class MarketUI extends UserInterface {
     }
 
     @Override
-    public void launchInterface(Scanner sc) throws IOException {
+    public boolean launchInterface(Scanner sc) throws IOException {
         System.out.println("Welcome to the market. Here you can either buy items from the merchant or sell your items for 50% of their value.");
         boolean run = true;
         while (run) {
@@ -149,6 +149,7 @@ public class MarketUI extends UserInterface {
             if (runChoice == 'N') {
                 run = false;
             }
-        }   
+        }
+        return true;   
     }
 }

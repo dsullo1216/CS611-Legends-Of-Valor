@@ -149,7 +149,7 @@ public class UserInventoryUI extends UserInterface {
     }
 
     @Override
-    public void launchInterface(Scanner sc) throws IOException {
+    public boolean launchInterface(Scanner sc) throws IOException {
         System.out.println("Welcome to your inventory. Here you can select a hero and view their items and switch the equipment that you are using.");
         boolean run = true;
         while (run) {
@@ -165,6 +165,7 @@ public class UserInventoryUI extends UserInterface {
                 run = false;
             }
         }
+        return true;
     }
     
 }
