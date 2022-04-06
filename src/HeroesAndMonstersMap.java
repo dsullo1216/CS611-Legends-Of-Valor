@@ -3,27 +3,27 @@ import java.util.Random;
 
 public class HeroesAndMonstersMap implements Map {
 
+    private Random rand = new Random();
+    private Cell[][] map;
+    private int[] currPosition;
+
     public HeroesAndMonstersMap() throws IOException {
         this.map = new Cell[8][8];
         this.map[0][0] = new BattleCell(new int[] {0,0});
         ((AccessibleCell) this.map[0][0]).setSquadHere();
         currPosition = new int[] {0,0};
-        randomizeMap();
+        initializeMap();
     }
 
     public HeroesAndMonstersMap(int mapSize) throws IOException {
         this.map = new Cell[mapSize][mapSize];
-        randomizeMap();
+        initializeMap();
     }
 
     public HeroesAndMonstersMap(int mapLength, int mapWidth) throws IOException {
         this.map = new Cell[mapLength][mapWidth];
-        randomizeMap();
+        initializeMap();
     }
-
-    private Random rand = new Random();
-    private Cell[][] map;
-    private int[] currPosition;
 
     public void printMap() {
 
@@ -49,7 +49,7 @@ public class HeroesAndMonstersMap implements Map {
         
     }
 
-    public void randomizeMap() throws IOException {
+    public void initializeMap() throws IOException {
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[0].length; j++) {
                 if (i == 0 && j == 0) {

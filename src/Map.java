@@ -5,9 +5,8 @@ public interface Map {
 
     public void printMap();
 
-    public void randomizeMap() throws IOException;
+    public void initializeMap() throws IOException;
     
-    public int[] getHeroSquadPosition();
 
     public Cell getCell(int[] position);
     
