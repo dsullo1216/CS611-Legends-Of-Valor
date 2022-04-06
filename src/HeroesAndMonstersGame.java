@@ -27,7 +27,7 @@ public class HeroesAndMonstersGame extends RPGGame {
     public int processMapInput(Scanner sc) {
         System.out.print("What would you like to do? Remember you can press 'h' to display the rules and list of controls again: ");
         char choice = Character.toLowerCase(sc.next().charAt(0));
-        int[] currPosition = map.getHeroSquadPosition();
+        int[] currPosition = ((HeroesAndMonstersMap) map).getHeroSquadPosition();
         switch (choice) {
             case ('w'): {
                 int[] newPosition = new int[] {currPosition[0]-1, currPosition[1]};
@@ -103,7 +103,7 @@ public class HeroesAndMonstersGame extends RPGGame {
                     break;
                 }
                 case (3): {
-                    MarketUI marketWindow = new MarketUI(party, (MarketCell) map.getCell(map.getHeroSquadPosition()));
+                    MarketUI marketWindow = new MarketUI(party, (MarketCell) map.getCell(((HeroesAndMonstersMap) map).getHeroSquadPosition()));
                     marketWindow.launchInterface(sc);
                     break;
                 }
