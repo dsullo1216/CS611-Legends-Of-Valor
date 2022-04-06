@@ -15,6 +15,9 @@ public abstract class AccessibleCell extends Cell {
         if (isHeroSquadHere) {
             return 'H';
         }
+        else if (isMonsterSquadHere) {
+            return 'M';
+        }
         return symbol;
     }
 
