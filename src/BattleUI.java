@@ -226,7 +226,7 @@ public class BattleUI extends UserInterface {
     public int chooseAction(Scanner sc) {
         System.out.println("Please choose an option from the list below to make your move");
         System.out.println("0. Attack \n 1. Use a Spell \n 2. Manage your inventory to change armor or use a potion");
-        System.out.println("Please make a choice: ");
+        System.out.print("Please make a choice: ");
         char actionChoice = sc.next().charAt(0);
         while (Integer.valueOf(actionChoice) < 0 && Integer.valueOf(actionChoice) > 2) {
             System.out.print("Invalid input please try again: ");
