@@ -5,7 +5,8 @@ public class LegendsOfValorMap implements Map {
 
     private Random rand = new Random();
     private Cell[][] map;
-    private HashMap<Integer, int[]> currPositions;
+    private HashMap<Integer, int[]> currHeroPositions;
+    private HashMap<Integer, int[]> currMonsterPositions;
 
     public LegendsOfValorMap() throws IOException {
         this.map = new Cell[8][8];
@@ -25,7 +26,7 @@ public class LegendsOfValorMap implements Map {
     }
 
     public int[] getHeroPosition(int heroIndex) {
-        return currPositions.get(heroIndex);
+        return currHeroPositions.get(heroIndex);
     }
 
     public int getLane(int col) {

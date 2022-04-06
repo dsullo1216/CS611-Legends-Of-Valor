@@ -6,7 +6,6 @@ public interface Map {
     public void printMap();
 
     public void initializeMap() throws IOException;
-    
 
     public Cell getCell(int[] position);
     
