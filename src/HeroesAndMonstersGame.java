@@ -7,7 +7,7 @@ public class HeroesAndMonstersGame extends RPGGame {
     private static final double BATTLERATE = 0.25;
 
     public HeroesAndMonstersGame() throws IOException {
-        this.map = new Map();
+        this.map = new HeroesAndMonstersMap();
     }
 
     public void printHelpMessages() {

@@ -4,9 +4,9 @@ import java.io.IOException;
 public class ReadFiles {
  
     public static Hero[] ListOfHeroes() throws IOException {
-        String[] WarriorArr = TSVReader.readTSVFile("./data/Warriors.tsv");
-        String[] SorcererArr = TSVReader.readTSVFile("./data/Sorcerers.tsv");
-        String[] PaladinArr = TSVReader.readTSVFile("./data/Paladins.tsv");
+        String[] WarriorArr = TSVReader.readTSVFile("./src/data/Warriors.tsv");
+        String[] SorcererArr = TSVReader.readTSVFile("./src/data/Sorcerers.tsv");
+        String[] PaladinArr = TSVReader.readTSVFile("./src/data/Paladins.tsv");
         Hero[] heroArr = new Hero[WarriorArr.length + SorcererArr.length + PaladinArr.length - 3];
         String[] splitRow;
         int resultIndex = 0;
@@ -29,9 +29,9 @@ public class ReadFiles {
     }    
 
     public static Monster[] ListOfMonsters() throws IOException {
-        String[] DragonArr = TSVReader.readTSVFile("./data/Dragons.tsv");
-        String[] ExoskeletonArr = TSVReader.readTSVFile("./data/Exoskeletons.tsv");
-        String[] SpiritArr = TSVReader.readTSVFile("./data/Spirits.tsv");
+        String[] DragonArr = TSVReader.readTSVFile("./src/data/Dragons.tsv");
+        String[] ExoskeletonArr = TSVReader.readTSVFile("./src/data/Exoskeletons.tsv");
+        String[] SpiritArr = TSVReader.readTSVFile("./src/data/Spirits.tsv");
         Monster[] monsterArr = new Monster[DragonArr.length + ExoskeletonArr.length + SpiritArr.length - 3];
         String[] splitRow;
         int resultIndex = 0;
@@ -54,12 +54,12 @@ public class ReadFiles {
     }
 
     public static Item[] ListOfItems() throws IOException {
-        String[] ArmorArr = TSVReader.readTSVFile("./data/Armory.tsv");
-        String[] WeaponArr = TSVReader.readTSVFile("./data/Weaponry.tsv");
-        String[] PotionArr = TSVReader.readTSVFile("./data/Potions.tsv");
-        String[] IceSpellArr = TSVReader.readTSVFile("./data/IceSpells.tsv");
-        String[] FireSpellArr = TSVReader.readTSVFile("./data/FireSpells.tsv");
-        String[] LightningSpellArr = TSVReader.readTSVFile("./data/LightningSpells.tsv");
+        String[] ArmorArr = TSVReader.readTSVFile("./src/data/Armory.tsv");
+        String[] WeaponArr = TSVReader.readTSVFile("./src/data/Weaponry.tsv");
+        String[] PotionArr = TSVReader.readTSVFile("./src/data/Potions.tsv");
+        String[] IceSpellArr = TSVReader.readTSVFile("./src/data/IceSpells.tsv");
+        String[] FireSpellArr = TSVReader.readTSVFile("./src/data/FireSpells.tsv");
+        String[] LightningSpellArr = TSVReader.readTSVFile("./src/data/LightningSpells.tsv");
         Item[] itemArr = new Item[ArmorArr.length + WeaponArr.length + PotionArr.length + IceSpellArr.length + FireSpellArr.length + LightningSpellArr.length - 6];
         String[] splitRow;
         int resultIndex = 0;
