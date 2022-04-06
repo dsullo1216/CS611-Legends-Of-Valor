@@ -89,7 +89,7 @@ public class HeroesAndMonstersMap implements Map {
         }
     }
 
-    public boolean moveSquad(int[] newPosition) {
+    public boolean moveSquad(int[] newPosition, int heroIndex) {
         if (newPosition[0] < 0 || newPosition[1] < 0 || newPosition[0] >= map.length || newPosition[1] >= map[0].length) {
             System.out.println("This position is out of bounds.");
             return false;

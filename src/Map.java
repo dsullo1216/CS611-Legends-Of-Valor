@@ -9,6 +9,6 @@ public interface Map {
 
     public Cell getCell(int[] position);
     
-    public boolean moveSquad(int[] newPosition);
+    public boolean moveSquad(int[] newPosition, int heroIndex);
 
 }

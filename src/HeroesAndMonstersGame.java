@@ -31,19 +31,19 @@ public class HeroesAndMonstersGame extends RPGGame {
         switch (choice) {
             case ('w'): {
                 int[] newPosition = new int[] {currPosition[0]-1, currPosition[1]};
-                return moveSquad(newPosition);
+                return moveSquad(newPosition, 0);
             }
             case ('a'): {
                 int[] newPosition = new int[] {currPosition[0], currPosition[1]-1};
-                return moveSquad(newPosition);
+                return moveSquad(newPosition, 0);
             }
             case ('s'): {
                 int[] newPosition = new int[] {currPosition[0]+1, currPosition[1]};
-                return moveSquad(newPosition);
+                return moveSquad(newPosition, 0);
             }
             case ('d'): {
                 int[] newPosition = new int[] {currPosition[0], currPosition[1]+1};
-                return moveSquad(newPosition);
+                return moveSquad(newPosition, 0);
             }
             case ('m'): {
                 if (map.getCell(currPosition) instanceof MarketCell) {
@@ -74,8 +74,8 @@ public class HeroesAndMonstersGame extends RPGGame {
        
     }
 
-    public int moveSquad (int[] newPosition) {
-        if (map.moveSquad(newPosition)) {
+    public int moveSquad (int[] newPosition, int heroIndex) {
+        if (map.moveSquad(newPosition, 0)) {
             if (map.getCell(newPosition) instanceof BattleCell) {
                 float roll = rand.nextFloat();
                 if (roll < BATTLERATE) {

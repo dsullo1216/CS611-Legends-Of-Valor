@@ -40,19 +40,19 @@ public class LegendsOfValorGame extends RPGGame {
         switch (choice) {
             case ('w'): {
                 int[] newPosition = new int[] {currPosition[0]-1, currPosition[1]};
-                return moveSquad(newPosition);
+                return moveSquad(newPosition, heroIndex);
             }
             case ('a'): {
                 int[] newPosition = new int[] {currPosition[0], currPosition[1]-1};
-                return moveSquad(newPosition);
+                return moveSquad(newPosition, heroIndex);
             }
             case ('s'): {
                 int[] newPosition = new int[] {currPosition[0]+1, currPosition[1]};
-                return moveSquad(newPosition);
+                return moveSquad(newPosition, heroIndex);
             }
             case ('d'): {
                 int[] newPosition = new int[] {currPosition[0], currPosition[1]+1};
-                return moveSquad(newPosition);
+                return moveSquad(newPosition, heroIndex);
             }
             case ('m'): {
                 if (map.getCell(currPosition) instanceof MarketCell) { // TODO Change this to NexusCell when it exists
@@ -88,8 +88,8 @@ public class LegendsOfValorGame extends RPGGame {
         }
     }
 
-    public int moveSquad (int[] newPosition) {
-        if (map.moveSquad(newPosition)) {
+    public int moveSquad (int[] newPosition, int heroIndex) {
+        if (map.moveSquad(newPosition, heroIndex)) {
             return 1;
         }
         System.out.println("The tile you are trying to reach is either out of the map or inaccessible. Please try again.");
@@ -97,7 +97,7 @@ public class LegendsOfValorGame extends RPGGame {
     }
 
     public int returnToNexus (int heroIndex) {
-        return moveSquad(heroSpawns.get(Integer.valueOf(heroIndex)));
+        return moveSquad(heroSpawns.get(Integer.valueOf(heroIndex)), heroIndex);
     }
 
     public int teleport (Scanner sc, int heroIndex) {
@@ -114,7 +114,7 @@ public class LegendsOfValorGame extends RPGGame {
             System.out.println("You cannot teleport to the lane that you are already in");
             return -1;
         }
-        return moveSquad(heroSpawns.get(Integer.valueOf(choice)));
+        return moveSquad(heroSpawns.get(Integer.valueOf(choice)), heroIndex);
     }
 
     @Override

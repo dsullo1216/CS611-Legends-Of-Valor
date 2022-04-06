@@ -48,7 +48,7 @@ public class LegendsOfValorMap implements Map {
     }
 
     @Override
-    public boolean moveSquad(int[] newPosition) {
+    public boolean moveSquad(int[] newPosition, int heroIndex) {
         // TODO Auto-generated method stub
         return false;
     }
