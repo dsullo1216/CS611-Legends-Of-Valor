@@ -10,7 +10,7 @@ public class HeroesAndMonstersMap implements Map {
     public HeroesAndMonstersMap() throws IOException {
         this.map = new Cell[8][8];
         this.map[0][0] = new BattleCell(new int[] {0,0});
-        ((AccessibleCell) this.map[0][0]).setSquadHere();
+        ((AccessibleCell) this.map[0][0]).setHeroSquadHere();
         currPosition = new int[] {0,0};
         initializeMap();
     }
@@ -98,8 +98,8 @@ public class HeroesAndMonstersMap implements Map {
             System.out.println("This cell is inaccessible");
             return false;
         }
-        ((AccessibleCell) this.map[currPosition[0]][currPosition[1]]).removeSquadHere();
-        ((AccessibleCell) this.map[newPosition[0]][newPosition[1]]).setSquadHere();
+        ((AccessibleCell) this.map[currPosition[0]][currPosition[1]]).removeHeroSquadHere();
+        ((AccessibleCell) this.map[newPosition[0]][newPosition[1]]).setHeroSquadHere();
         currPosition = newPosition;
         return true;
     }

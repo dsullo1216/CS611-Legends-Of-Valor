@@ -2,10 +2,12 @@
 public abstract class AccessibleCell extends Cell {
 
     protected boolean isHeroSquadHere;
+    protected boolean isMonsterSquadHere;
     
     protected AccessibleCell(char symbol, int[] position) {
         super(symbol, true, position);
         this.isHeroSquadHere = false;
+        this.isMonsterSquadHere = false;
     }
 
     @Override
@@ -16,13 +18,23 @@ public abstract class AccessibleCell extends Cell {
         return symbol;
     }
 
-    public boolean setSquadHere() {
+    public boolean setHeroSquadHere() {
         this.isHeroSquadHere = true;
         return this.isHeroSquadHere;
     }
 
-    public boolean removeSquadHere() {
+    public boolean removeHeroSquadHere() {
         this.isHeroSquadHere = false;
+        return this.isHeroSquadHere;
+    }
+
+    public boolean setMonsterSquadHere() {
+        this.isMonsterSquadHere = true;
+        return this.isHeroSquadHere;
+    }
+
+    public boolean removeMonsterSquadHere() {
+        this.isMonsterSquadHere = false;
         return this.isHeroSquadHere;
     }
  
