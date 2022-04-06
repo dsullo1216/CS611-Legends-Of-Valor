@@ -36,7 +36,7 @@ public class LegendsOfValorGame extends RPGGame {
     public int processMapInput(Scanner sc, int heroIndex) {
         System.out.print("What would you like to do? Remember you can press 'h' to display the rules and list of controls again: ");
         char choice = Character.toLowerCase(sc.next().charAt(0));
-        int[] currPosition = ((LegendsOfValorMap)map).getHeroPosition(heroIndex); // TODO Handle Unique Hero rather than squad
+        int[] currPosition = ((LegendsOfValorMap)map).getHeroPosition(heroIndex);
         switch (choice) {
             case ('w'): {
                 int[] newPosition = new int[] {currPosition[0]-1, currPosition[1]};
@@ -124,7 +124,7 @@ public class LegendsOfValorGame extends RPGGame {
         while (true) {
             for (int heroIndex = 0; heroIndex < party.size(); heroIndex++) {
                 System.out.println(party.getEntityAt(heroIndex).getName() + ", please make your move.");
-                int choice = processMapInput(sc);
+                int choice = processMapInput(sc, heroIndex);
                 switch (choice) {
                     case (3): {
                         MarketUI marketWindow = new MarketUI(party, (MarketCell) map.getCell(((LegendsOfValorMap)map).getHeroPosition(heroIndex))); 
