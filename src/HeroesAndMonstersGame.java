@@ -148,7 +148,6 @@ public class HeroesAndMonstersGame extends Game {
                 case (2): {
                     BattleUI battleWindow = new BattleUI(party);
                     battleWindow.launchInterface(sc);
-                    System.out.println("A battle will occur here soon");
                     break;
                 }
                 case (3): {
