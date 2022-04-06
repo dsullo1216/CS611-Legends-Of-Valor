@@ -5,7 +5,7 @@ public class LegendsOfValorMap implements Map {
 
     private Random rand = new Random();
     private Cell[][] map;
-    private HashMap<Hero, int[]> currPositions;
+    private HashMap<Integer, int[]> currPositions;
 
     public LegendsOfValorMap() throws IOException {
         this.map = new Cell[8][8];
