@@ -3,13 +3,21 @@ import java.util.*;
 
 public class LegendsOfValorGame extends RPGGame {
 
-    private HashMap<Integer, int[]> nexusSpawns;
+    private HashMap<Integer, int[]> heroSpawns;
+    private HashMap<Integer, int[]> monsterSpawns;
 
     public LegendsOfValorGame() throws IOException {
         this.map = new LegendsOfValorMap();
-        nexusSpawns.put(Integer.valueOf(0), new int[] {0,7});
-        nexusSpawns.put(Integer.valueOf(1), new int[] {3,7});
-        nexusSpawns.put(Integer.valueOf(2), new int[] {5,7});
+        setSpawns();
+    }
+
+    private void setSpawns() {
+        heroSpawns.put(Integer.valueOf(0), new int[] {7,0});
+        heroSpawns.put(Integer.valueOf(1), new int[] {7,3});
+        heroSpawns.put(Integer.valueOf(2), new int[] {7,6});
+        monsterSpawns.put(Integer.valueOf(0), new int[] {0,0});
+        monsterSpawns.put(Integer.valueOf(1), new int[] {0,3});
+        monsterSpawns.put(Integer.valueOf(2), new int[] {0,6});
     }
 
     public void printHelpMessages() {
@@ -17,7 +25,7 @@ public class LegendsOfValorGame extends RPGGame {
         System.out.println("Welcome to Legends of Valor. Here, you are able to fight monsters and make it to the Monster's Nexus to win");
         System.out.println("Each of your three heroes will start at the bottom of their respective lane. Each tile where your hero is located will be labeled with HX where X is the number of the hero");
         System.out.println("To move around the map, you can use 'w', 'a', 's', and 'd' to move up, left, down, and right respectively.");
-        System.out.println("Additionally, you can teleport to other lanes by pressing 't' or teleport back to your Nexus spawn by pressing 'b'.");
+        System.out.println("Additionally, you can teleport to other lanes by pressing 't' or return back to your Nexus spawn by pressing 'b'.");
         System.out.println("To view information about your party, you can press 'e' to display their stats");
         System.out.println("To view your party's inventories, you can press 'i' to enter the inventory display");
         System.out.println("To quit Legends of Valor, you can press 'q' to quit the game from the map.");
@@ -89,7 +97,24 @@ public class LegendsOfValorGame extends RPGGame {
     }
 
     public int returnToNexus (int heroIndex) {
-        return moveSquad(nexusSpawns.get(Integer.valueOf(heroIndex)));
+        return moveSquad(heroSpawns.get(Integer.valueOf(heroIndex)));
+    }
+
+    public int teleport (Scanner sc, int heroIndex) {
+        System.out.println("Which lane would you like to teleport to? \n 0. Top Lane \n 1. Mid Lane \n 2. Bot Lane");
+        System.out.print("Please enter the number for which lane you would like to teleport to: ");
+        char actionChoice = sc.next().charAt(0);
+        while (Integer.valueOf(actionChoice) < 0 && Integer.valueOf(actionChoice) > 2) {
+            System.out.print("Invalid input please try again: ");
+            actionChoice = sc.next().charAt(0);
+        }
+        int choice = Integer.valueOf(actionChoice);
+        int currLane = ((LegendsOfValorMap) map).getLane(((LegendsOfValorMap) map).getHeroPosition(heroIndex)[1]);
+        if (choice == currLane) {
+            System.out.println("You cannot teleport to the lane that you are already in");
+            return -1;
+        }
+        return moveSquad(heroSpawns.get(Integer.valueOf(choice)));
     }
 
     @Override
@@ -122,7 +147,8 @@ public class LegendsOfValorGame extends RPGGame {
                     return;
                 }
                 case (8): {
-                    // TODO Add teleporting
+                    int heroIndex = 0;
+                    teleport(sc, heroIndex);
                     break;
                 }
                 case (9): {
