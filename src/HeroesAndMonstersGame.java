@@ -24,7 +24,7 @@ public class HeroesAndMonstersGame extends RPGGame {
         System.out.println("===========================================================================================================================================");
     }
 
-    public int processMapInput(Scanner sc) {
+    public int processMapInput(Scanner sc, int heroIndex) {
         System.out.print("What would you like to do? Remember you can press 'h' to display the rules and list of controls again: ");
         char choice = Character.toLowerCase(sc.next().charAt(0));
         int[] currPosition = ((HeroesAndMonstersMap) map).getHeroSquadPosition();
@@ -93,7 +93,7 @@ public class HeroesAndMonstersGame extends RPGGame {
     public void playGame(Scanner sc) throws IOException {
         launchGame(sc, "Heroes and Monsters");
         while (true) {
-            int choice = processMapInput(sc);
+            int choice = processMapInput(sc, 0);
             switch (choice) {
                 case (2): {
                     BattleUI battleWindow = new BattleUI(party);

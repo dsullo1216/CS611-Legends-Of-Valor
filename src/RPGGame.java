@@ -58,7 +58,7 @@ public abstract class RPGGame extends Game {
     }
 
     public abstract void printHelpMessages();
-    public abstract int processMapInput(Scanner sc);
+    public abstract int processMapInput(Scanner sc, int heroIndex);
     public abstract int moveSquad (int[] newPosition);
 
 }

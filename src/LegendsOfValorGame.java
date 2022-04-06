@@ -33,10 +33,10 @@ public class LegendsOfValorGame extends RPGGame {
         System.out.println("===========================================================================================================================================");
     }
 
-    public int processMapInput(Scanner sc) {
+    public int processMapInput(Scanner sc, int heroIndex) {
         System.out.print("What would you like to do? Remember you can press 'h' to display the rules and list of controls again: ");
         char choice = Character.toLowerCase(sc.next().charAt(0));
-        int[] currPosition = map.getHeroSquadPosition(); // TODO Handle Unique Hero rather than squad
+        int[] currPosition = ((LegendsOfValorMap)map).getHeroPosition(heroIndex); // TODO Handle Unique Hero rather than squad
         switch (choice) {
             case ('w'): {
                 int[] newPosition = new int[] {currPosition[0]-1, currPosition[1]};
@@ -122,42 +122,42 @@ public class LegendsOfValorGame extends RPGGame {
         System.out.println("PLEASE CHOOSE 3 CHAMPIONS WHEN STARTING THE GAME IN ORDER TO PROPERLY RUN");
         launchGame(sc, "Legends of Valor");
         while (true) {
-            // TODO Here to add a for loop iterating through the array of Heros 
-            int choice = processMapInput(sc);
-            switch (choice) {
-                case (3): {
-                    MarketUI marketWindow = new MarketUI(party, (MarketCell) map.getCell(map.getHeroSquadPosition())); // TODO Handle Unique Hero rather than squad
-                    marketWindow.launchInterface(sc);
-                    break;
-                }
-                case (4): {
-                    System.out.println("\n Your party is: " + "\n" + party.toString());
-                    break;
-                }
-                case (5): {
-                    UserInventoryUI inventoryCheck = new UserInventoryUI(party);
-                    inventoryCheck.launchInterface(sc);
-                    break;
-                }
-                case (6): {
-                    printHelpMessages();
-                    break;
-                }
-                case (7): {
-                    return;
-                }
-                case (8): {
-                    int heroIndex = 0;
-                    teleport(sc, heroIndex);
-                    break;
-                }
-                case (9): {
-                    int heroIndex = 0;
-                    returnToNexus(heroIndex);
-                    break;
-                }
-                default: {
-                    break;
+            for (int heroIndex = 0; heroIndex < party.size(); heroIndex++) {
+                System.out.println(party.getEntityAt(heroIndex).getName() + ", please make your move.");
+                int choice = processMapInput(sc);
+                switch (choice) {
+                    case (3): {
+                        MarketUI marketWindow = new MarketUI(party, (MarketCell) map.getCell(((LegendsOfValorMap)map).getHeroPosition(heroIndex))); 
+                        marketWindow.launchInterface(sc);
+                        break;
+                    }
+                    case (4): {
+                        System.out.println("\n Your party is: " + "\n" + party.toString());
+                        break;
+                    }
+                    case (5): {
+                        UserInventoryUI inventoryCheck = new UserInventoryUI(party);
+                        inventoryCheck.launchInterface(sc);
+                        break;
+                    }
+                    case (6): {
+                        printHelpMessages();
+                        break;
+                    }
+                    case (7): {
+                        return;
+                    }
+                    case (8): {
+                        teleport(sc, heroIndex);
+                        break;
+                    }
+                    case (9): {
+                        returnToNexus(heroIndex);
+                        break;
+                    }
+                    default: {
+                        break;
+                    }
                 }
             }
             map.printMap();
