@@ -92,8 +92,21 @@ public class LegendsOfValorMap implements Map {
 
     @Override
     public Cell getCell(int[] position) {
-        // TODO Auto-generated method stub
-        return null;
+        Cell result = map[position[0]][position[1]];
+        switch (result.getType()) {
+            case ("Bush"): {
+                return (BushCell) result;
+            }
+            case ("Cave"): {
+                return (CaveCell) result;
+            }
+            case ("Koulou"): {
+                return (KoulouCell) result;
+            }
+            default: {
+                return (PlainCell) result;
+            }
+        }
     }
 
     @Override
