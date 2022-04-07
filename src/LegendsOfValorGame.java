@@ -131,7 +131,7 @@ public class LegendsOfValorGame extends RPGGame {
                         Monster currMonster = new Monster("name", 0, 0, 0, 0); // TODO Add method to actually get the instance of the monster nearby
                         BattleUI battleWindow = new BattleUI((Hero) party.getEntityAt(heroIndex), currMonster);
                         if (!battleWindow.launchInterface(sc)) {
-                            System.out.println("Your hero has returned to his nexus");
+                            System.out.println("Your hero has returned to their nexus");
                             // TODO reset the hero's health/mana
                             moveSquad(heroSpawns.get(heroIndex), heroIndex);
                         }
