@@ -213,11 +213,7 @@ public class BattleUI extends UserInterface {
     }
 
     private boolean finishBattle(boolean HerosWon) {
-        if (HerosWon == false) {
-            System.out.println("Game Over. Thank you for playing!");
-            
-        }
-        else {
+        if (HerosWon) {
             for (int i = 0; i < party.size(); i++) {
                 if (party.getEntityAt(i).getHP() < 0) {
                     party.getEntityAt(i).updateHP(party.getEntityAt(i).getLevel() * 50);

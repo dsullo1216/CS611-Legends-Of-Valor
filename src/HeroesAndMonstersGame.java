@@ -98,6 +98,7 @@ public class HeroesAndMonstersGame extends RPGGame {
                 case (2): {
                     BattleUI battleWindow = new BattleUI(party);
                     if (!battleWindow.launchInterface(sc)) {
+                        System.out.println("Game Over. Thank you for playing!");
                         return;
                     }
                     break;

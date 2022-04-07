@@ -53,4 +53,5 @@ public class LegendsOfValorMap implements Map {
         return false;
     }
     
+    // TODO Add method to move monsters
 }

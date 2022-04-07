@@ -90,6 +90,7 @@ public class LegendsOfValorGame extends RPGGame {
 
     public int moveSquad (int[] newPosition, int heroIndex) {
         if (map.moveSquad(newPosition, heroIndex)) {
+            // TODO Add method to check for adjacent monster; if there is a monster return 2
             return 1;
         }
         System.out.println("The tile you are trying to reach is either out of the map or inaccessible. Please try again.");
@@ -126,6 +127,19 @@ public class LegendsOfValorGame extends RPGGame {
                 System.out.println(party.getEntityAt(heroIndex).getName() + ", please make your move.");
                 int choice = processMapInput(sc, heroIndex);
                 switch (choice) {
+                    case (2): {
+                        Monster currMonster = new Monster("name", 0, 0, 0, 0); // TODO Add method to actually get the instance of the monster nearby
+                        BattleUI battleWindow = new BattleUI((Hero) party.getEntityAt(heroIndex), currMonster);
+                        if (!battleWindow.launchInterface(sc)) {
+                            System.out.println("Your hero has returned to his nexus");
+                            // TODO reset the hero's health/mana
+                            moveSquad(heroSpawns.get(heroIndex), heroIndex);
+                        }
+                        else {
+                            // TODO call method to move monster 
+                        }
+                        break;
+                    }
                     case (3): {
                         MarketUI marketWindow = new MarketUI(party, (MarketCell) map.getCell(((LegendsOfValorMap)map).getHeroPosition(heroIndex))); 
                         marketWindow.launchInterface(sc);
@@ -160,6 +174,8 @@ public class LegendsOfValorGame extends RPGGame {
                     }
                 }
             }
+            // TODO Call method to advance monsters one space and initiate fights if need be ONE AT A TIME
+            // TODO Add method to add mana/hp buff after each round to all heros
             map.printMap();
         }
         
