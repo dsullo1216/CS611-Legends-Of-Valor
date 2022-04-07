@@ -16,29 +16,45 @@ public class LegendsOfValorMap implements Map {
     @Override
     public void printMap() {
         // TODO Auto-generated method stub
-        for (int i = 0; i < map.length; i++) {
-            System.out.printf("==========");
-        }
-        System.out.println();
-        for(int i = 0; i < map[0].length; i++) {
-            System.out.println();
-            System.out.printf("   ||   ");
-            for(int j = 0; j < map.length; j++) {
-                System.out.print( map[i][j].getSymbol());
-                System.out.print("   ||   ");
-            }
-            System.out.println();
-            System.out.printf(" ");
-            System.out.println();
-            for(int j = 0; j < map.length; j++) {
-                System.out.printf("==========");
-            }
-            System.out.println();
-        }
+    	for (int i = 0; i < map.length; i++) {
+    		for (int j =0; j < map.length; j++) {
+        		System.out.print( map[i][j].getSymbol() + " - " + map[i][j].getSymbol() + " - " + map[i][j].getSymbol() + "  ");
+    		}
+    		System.out.println();
+    		for (int j =0; j < map.length; j++) {
+    			System.out.print("|       |  ");
+    		}
+    		System.out.println();
+    		for (int j =0; j < map.length; j++) {
+        		System.out.print( map[i][j].getSymbol() + " - " + map[i][j].getSymbol() + " - " + map[i][j].getSymbol() + "  ");
+    		}
+    		System.out.println();
+    		if (i != map.length-1) {
+    			System.out.println();
+    		}
+    	}
+//        for (int i = 0; i < map.length; i++) {
+//            System.out.printf("==========");
+//        }
+//        System.out.println();
+//        for(int i = 0; i < map[0].length; i++) {
+//            System.out.println();
+//            System.out.printf("   ||   ");
+//            for(int j = 0; j < map.length; j++) {
+//                System.out.print( map[i][j].getSymbol());
+//                System.out.print("   ||   ");
+//            }
+//            System.out.println();
+//            System.out.printf(" ");
+//            System.out.println();
+//            for(int j = 0; j < map.length; j++) {
+//                System.out.printf("==========");
+//            }
+//            System.out.println();
+//        }
         
     }
- 
-
+        
     @Override
     public void initializeMap() throws IOException {
         initializePositions();
