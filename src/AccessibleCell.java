@@ -4,7 +4,7 @@ public abstract class AccessibleCell extends Cell {
     protected boolean isHeroSquadHere;
     protected boolean isMonsterSquadHere;
     
-    protected AccessibleCell(char symbol, int[] position) {
+    protected AccessibleCell(char symbol, int[] position, String type) {
         super(symbol, true, position);
         this.isHeroSquadHere = false;
         this.isMonsterSquadHere = false;

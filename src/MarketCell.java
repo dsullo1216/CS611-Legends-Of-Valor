@@ -6,8 +6,7 @@ public class MarketCell extends AccessibleCell {
     private Inventory stock;
 
     public MarketCell(int[] position) throws IOException {
-        super('M', position);
-        type = "Market";
+        super('M', position, "Market");
         stock = new Inventory(15);
         stock.randomizeInventory();
     }
