@@ -91,6 +91,7 @@ public class LegendsOfValorGame extends RPGGame {
     public int moveSquad (int[] newPosition, int heroIndex) {
         if (map.moveSquad(newPosition, heroIndex)) {
             // TODO Add method to check for adjacent monster; if there is a monster return 2
+            // TODO Check for instance of buff cells and call method to apply buffs 
             return 1;
         }
         System.out.println("The tile you are trying to reach is either out of the map or inaccessible. Please try again.");
@@ -131,12 +132,12 @@ public class LegendsOfValorGame extends RPGGame {
                         Monster currMonster = new Monster("name", 0, 0, 0, 0); // TODO Add method to actually get the instance of the monster nearby
                         BattleUI battleWindow = new BattleUI((Hero) party.getEntityAt(heroIndex), currMonster);
                         if (!battleWindow.launchInterface(sc)) {
-                            System.out.println("Your hero has returned to their nexus");
+                            System.out.println("Your hero has returned to their nexus after being killed");
                             // TODO reset the hero's health/mana
                             moveSquad(heroSpawns.get(heroIndex), heroIndex);
                         }
                         else {
-                            // TODO call method to move monster 
+                            // TODO call method to move monster back to its nexus
                         }
                         break;
                     }
