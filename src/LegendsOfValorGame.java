@@ -8,6 +8,8 @@ public class LegendsOfValorGame extends RPGGame {
 
     public LegendsOfValorGame() throws IOException {
         this.map = new LegendsOfValorMap();
+        this.heroSpawns = new HashMap<Integer, int[]>();
+        this.monsterSpawns = new HashMap<Integer, int[]>();
         setSpawns();
     }
 

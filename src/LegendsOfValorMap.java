@@ -10,6 +10,8 @@ public class LegendsOfValorMap implements Map {
 
     public LegendsOfValorMap() throws IOException {
         this.map = new Cell[8][8];
+        this.currHeroPositions = new HashMap<Integer, int[]>();
+        this.currMonsterPositions = new HashMap<Integer, int[]>();
         initializeMap();
     }
 

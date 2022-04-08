@@ -5,7 +5,8 @@ import java.util.Scanner;
 public class Main {
     
     public static void main(String[] args) throws IOException {
-        Game test1 = new HeroesAndMonstersGame();
+        //Game test1 = new HeroesAndMonstersGame();
+        Game test1 = new LegendsOfValorGame();
         Scanner sc = new Scanner(System.in);
         test1.playGame(sc);
     }
