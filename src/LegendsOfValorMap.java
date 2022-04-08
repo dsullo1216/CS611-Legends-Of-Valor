@@ -20,46 +20,24 @@ public class LegendsOfValorMap implements Map {
         // TODO Auto-generated method stub
     	for (int i = 0; i < map.length; i++) {
     		for (int j = 0; j < map.length; j++) {
-        		System.out.print( map[i][j].getSymbol() + " - " + map[i][j].getSymbol() + " - " + map[i][j].getSymbol() + "  ");
+        		System.out.print( map[i][j].getSymbol() + " - " + map[i][j].getSymbol() + " - " + map[i][j].getSymbol() + "   ");
     		}
     		System.out.println();
     		for (int j = 0; j < map.length; j++) {
     			if ( map[i][j].getSymbol() == 'X' ) {
-    				System.out.print("|XXXXXXX|  ");
+    				System.out.print("|XXXXXXX|   ");
     			}
     			else {
-    				System.out.print("|       |  ");
+    				System.out.print("|       |   ");
     			}
     		}
     		System.out.println();
     		for (int j = 0; j < map.length; j++) {
-        		System.out.print( map[i][j].getSymbol() + " - " + map[i][j].getSymbol() + " - " + map[i][j].getSymbol() + "  ");
+        		System.out.print( map[i][j].getSymbol() + " - " + map[i][j].getSymbol() + " - " + map[i][j].getSymbol() + "   ");
     		}
     		System.out.println();
-    		if (i != map.length-1) {
-    			System.out.println();
-    		}
-    	}
-//        for (int i = 0; i < map.length; i++) {
-//            System.out.printf("==========");
-//        }
-//        System.out.println();
-//        for(int i = 0; i < map[0].length; i++) {
-//            System.out.println();
-//            System.out.printf("   ||   ");
-//            for(int j = 0; j < map.length; j++) {
-//                System.out.print( map[i][j].getSymbol());
-//                System.out.print("   ||   ");
-//            }
-//            System.out.println();
-//            System.out.printf(" ");
-//            System.out.println();
-//            for(int j = 0; j < map.length; j++) {
-//                System.out.printf("==========");
-//            }
-//            System.out.println();
-//        }
-        
+    		System.out.println();
+    	}        
     }
         
     @Override
@@ -97,7 +75,7 @@ public class LegendsOfValorMap implements Map {
     public void initializeLanes() {
         for (int i = 1; i < map.length - 1; i++) {
             for (int j = 0; j < map[0].length; j++) {
-                if (j == 3 || j ==  5) {
+                if (j == 2 || j ==  5) {
                     continue;
                 }
                 float roll = rand.nextFloat();

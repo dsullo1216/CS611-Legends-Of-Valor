@@ -10,7 +10,7 @@ public abstract class RPGGame extends Game {
         System.out.println("Welcome to " + gameName);
         pickHeroes(sc);
         printHelpMessages();
-        System.out.println("\n Here is the map for your journey! Good luck! \n" );
+        System.out.println("\nHere is the map for your journey! Good luck! \n" );
         map.printMap();
     }
     
