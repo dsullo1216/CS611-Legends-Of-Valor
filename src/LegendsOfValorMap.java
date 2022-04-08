@@ -26,9 +26,9 @@ public class LegendsOfValorMap implements Map {
     		for (int j = 0; j < map.length; j++) {
     			if ( map[i][j].getSymbol() == 'X' ) {
     				System.out.print("|XXXXXXX|   ");
-    			}
+    			}                             
     			else {
-    				System.out.print("|       |   ");
+    				System.out.print("|" + heroOrMonsterString(i, j) + "|   ");
     			}
     		}
     		System.out.println();
@@ -98,6 +98,51 @@ public class LegendsOfValorMap implements Map {
 
     public int[] getHeroPosition(int heroIndex) {
         return currHeroPositions.get(heroIndex);
+    }
+    
+    public int checkIfHerosHere(int i, int j) {
+    	int[] currentCell = {i,j};
+    	if ( Arrays.equals(getHeroPosition(0), currentCell) ) {
+    		return 0;
+    	} else if ( Arrays.equals(getHeroPosition(1), currentCell) ) {
+    		return 1;
+    	} else if ( Arrays.equals(getHeroPosition(2), currentCell) ) {
+    		return 2;
+    	} else {
+    		return -1;
+    	}
+    }
+    
+    public int[] getMonsterPosition(int monsterIndex) {
+        return currMonsterPositions.get(monsterIndex);
+    }
+    
+    public int checkIfMonstersHere(int i, int j) {
+    	int[] currentCell = {i,j};
+    	if ( Arrays.equals(getMonsterPosition(0), currentCell) ) {
+    		return 0;
+    	} else if ( Arrays.equals(getMonsterPosition(1), currentCell) ) {
+    		return 1;
+    	} else if ( Arrays.equals(getMonsterPosition(2), currentCell) ) {
+    		return 2;
+    	} else {
+    		return -1;
+    	}
+    }
+    
+    public String heroOrMonsterString(int i, int j) {
+    	int whichHeroHere = checkIfHerosHere(i, j);
+    	int whichMonsterHere = checkIfMonstersHere(i, j);
+    	char[] allHere = {' ', ' ', ' ', ' ', ' ', ' ', ' '};
+    	if (whichHeroHere != -1) {
+    		allHere[1] = 'H';
+    		allHere[2] = String.valueOf(whichHeroHere).charAt(0);
+    	} 
+    	if (whichMonsterHere != -1) {
+    		allHere[4] = 'M';
+    		allHere[5] = String.valueOf(whichMonsterHere).charAt(0);
+    	}
+    	return new String(allHere);
     }
 
     public int getLane(int col) {
