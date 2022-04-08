@@ -19,15 +19,20 @@ public class LegendsOfValorMap implements Map {
     public void printMap() {
         // TODO Auto-generated method stub
     	for (int i = 0; i < map.length; i++) {
-    		for (int j =0; j < map.length; j++) {
+    		for (int j = 0; j < map.length; j++) {
         		System.out.print( map[i][j].getSymbol() + " - " + map[i][j].getSymbol() + " - " + map[i][j].getSymbol() + "  ");
     		}
     		System.out.println();
-    		for (int j =0; j < map.length; j++) {
-    			System.out.print("|       |  ");
+    		for (int j = 0; j < map.length; j++) {
+    			if ( map[i][j].getSymbol() == 'X' ) {
+    				System.out.print("|XXXXXXX|  ");
+    			}
+    			else {
+    				System.out.print("|       |  ");
+    			}
     		}
     		System.out.println();
-    		for (int j =0; j < map.length; j++) {
+    		for (int j = 0; j < map.length; j++) {
         		System.out.print( map[i][j].getSymbol() + " - " + map[i][j].getSymbol() + " - " + map[i][j].getSymbol() + "  ");
     		}
     		System.out.println();
@@ -82,7 +87,8 @@ public class LegendsOfValorMap implements Map {
     }
 
     public void initializeNexuses() throws IOException {
-        for (int i = 0; i < map.length; i+=3) {
+        int[] nexusIndices = {0,1,3,4,6,7};
+    	for (int i: nexusIndices) {
             this.map[0][i] = new NexusCell(new int[] {0,i});
             this.map[7][i] = new NexusCell(new int[] {7,i});
         }
