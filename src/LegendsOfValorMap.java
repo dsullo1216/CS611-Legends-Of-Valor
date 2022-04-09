@@ -100,6 +100,8 @@ public class LegendsOfValorMap implements Map {
         return currHeroPositions.get(heroIndex);
     }
     
+    // Check if there are heroes (if any) at the specified cell and return the index of the one there 
+    // or -1 if no heroes are there 
     public int checkIfHerosHere(int i, int j) {
     	int[] currentCell = {i,j};
     	if ( Arrays.equals(getHeroPosition(0), currentCell) ) {
@@ -117,6 +119,8 @@ public class LegendsOfValorMap implements Map {
         return currMonsterPositions.get(monsterIndex);
     }
     
+    // Check if there are monsters (if any) at the specified cell and return the index of the one there 
+    // or -1 if no monsters are there
     public int checkIfMonstersHere(int i, int j) {
     	int[] currentCell = {i,j};
     	if ( Arrays.equals(getMonsterPosition(0), currentCell) ) {
@@ -130,6 +134,8 @@ public class LegendsOfValorMap implements Map {
     	}
     }
     
+    // Construct the string that each cell would contain to show which heroes and monsters are there
+    // Makes sure the presence of 1 monster and 1 hero in a cell don't overlap on the map
     public String heroOrMonsterString(int i, int j) {
     	int whichHeroHere = checkIfHerosHere(i, j);
     	int whichMonsterHere = checkIfMonstersHere(i, j);

@@ -105,7 +105,7 @@ public class LegendsOfValorGame extends RPGGame {
     }
 
     public int teleport (Scanner sc, int heroIndex) {
-        System.out.println("Which lane would you like to teleport to? \n 0. Top Lane \n 1. Mid Lane \n 2. Bot Lane");
+        System.out.println("Which lane would you like to teleport to? \n 0. Top Lane \n 1. Middle Lane \n 2. Bottom Lane");
         System.out.print("Please enter the number for which lane you would like to teleport to: ");
         char actionChoice = sc.next().charAt(0);
         while (Integer.valueOf(actionChoice) < 0 && Integer.valueOf(actionChoice) > 2) {
