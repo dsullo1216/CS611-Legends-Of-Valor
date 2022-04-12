@@ -123,7 +123,7 @@ public class LegendsOfValorGame extends RPGGame {
 
     @Override
     public void playGame(Scanner sc) throws IOException {
-        System.out.println("PLEASE CHOOSE 3 CHAMPIONS WHEN STARTING THE GAME IN ORDER TO PROPERLY RUN");
+        // System.out.println("PLEASE CHOOSE 3 CHAMPIONS WHEN STARTING THE GAME IN ORDER TO PROPERLY RUN");
         launchGame(sc, "Legends of Valor");
         while (true) {
             for (int heroIndex = 0; heroIndex < party.size(); heroIndex++) {

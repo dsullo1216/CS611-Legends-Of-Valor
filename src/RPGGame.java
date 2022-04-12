@@ -7,21 +7,32 @@ public abstract class RPGGame extends Game {
     HeroSquad party;
 
     public void launchGame(Scanner sc, String gameName) throws IOException {
-        System.out.println("Welcome to " + gameName);
-        pickHeroes(sc);
+        System.out.println("Welcome to " + gameName + "!");
+        if (gameName.equals("Legends of Valor")) {
+        	pickHeroes(sc, true);
+        } else {
+        	pickHeroes(sc, false);
+        }
         printHelpMessages();
         System.out.println("\nHere is the map for your journey! Good luck! \n" );
         map.printMap();
     }
     
-    public void pickHeroes(Scanner sc) throws IOException {
-        System.out.print("How many Heroes would you like to play with? (1-3): ");
-        char numHeroesChoice = sc.next().charAt(0);
-        while (!"123".contains(numHeroesChoice + "")) {
-            System.out.print("Invalid number of Heroes. Please enter a number between 1 and 3: ");
+    public void pickHeroes(Scanner sc, boolean LOV) throws IOException {
+        int numHeroes;
+        char numHeroesChoice;
+        if (LOV) {
+        	numHeroes = 3;
+        	numHeroesChoice = '3';
+        } else {
+            System.out.print("How many Heroes would you like to play with? (1-3): ");
             numHeroesChoice = sc.next().charAt(0);
+            while (!"123".contains(numHeroesChoice + "")) {
+                System.out.print("Invalid number of Heroes. Please enter a number between 1 and 3: ");
+                numHeroesChoice = sc.next().charAt(0);
+            }
+            numHeroes = Character.getNumericValue(numHeroesChoice);
         }
-        int numHeroes = Character.getNumericValue(numHeroesChoice);
         party = new HeroSquad(numHeroes);
         System.out.println("Here is the list of heroes and their starting statistics. You make pick " + numHeroesChoice + " unique heroes.");
         System.out.println("Please note that the order in which you pick your heroes will be the order in which they fight in battle");
