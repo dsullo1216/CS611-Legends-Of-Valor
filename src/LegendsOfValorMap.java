@@ -20,11 +20,11 @@ public class LegendsOfValorMap implements Map {
         // TODO Auto-generated method stub
     	for (int i = 0; i < map.length; i++) {
     		for (int j = 0; j < map.length; j++) {
-        		System.out.print( map[i][j].getSymbol() + " - " + map[i][j].getSymbol() + " - " + map[i][j].getSymbol() + "   ");
+        		System.out.print( map[i][j].getIcon() + " - " + map[i][j].getIcon() + " - " + map[i][j].getIcon() + "   ");
     		}
     		System.out.println();
     		for (int j = 0; j < map.length; j++) {
-    			if ( map[i][j].getSymbol() == 'X' ) {
+    			if ( map[i][j].getIcon() == 'X' ) {
     				System.out.print("|XXXXXXX|   ");
     			}                             
     			else {
@@ -33,7 +33,7 @@ public class LegendsOfValorMap implements Map {
     		}
     		System.out.println();
     		for (int j = 0; j < map.length; j++) {
-        		System.out.print( map[i][j].getSymbol() + " - " + map[i][j].getSymbol() + " - " + map[i][j].getSymbol() + "   ");
+        		System.out.print( map[i][j].getIcon() + " - " + map[i][j].getIcon() + " - " + map[i][j].getIcon() + "   ");
     		}
     		System.out.println();
     		System.out.println();
@@ -215,5 +215,26 @@ public class LegendsOfValorMap implements Map {
         currHeroPositions.replace(index, oldPosition, newPosition);
     }
     
+    // returns true if monster has reached hero nexus (win)
+    public boolean moveMonster(int[] newPosition, int monsterIndex) {
     // TODO Add method to move monsters
+    	if (getCell(newPosition).getType().equals("Nexus") && newPosition[0] == 7) {
+            return true;
+        }
+	    removeMonster(monsterIndex);
+	    setMonster(monsterIndex, newPosition);
+	    return false;    
+    }
+    
+    public void removeMonster(int index) {
+        int[] monsterCurrPosition = currMonsterPositions.get(index);
+    	((AccessibleCell) this.map[monsterCurrPosition[0]][monsterCurrPosition[1]]).removeMonsterSquadHere();
+    }
+    
+    public void setMonster(int index, int[] newPosition) {
+        ((AccessibleCell) this.map[newPosition[0]][newPosition[1]]).setMonsterSquadHere();
+        int[] oldPosition = currMonsterPositions.get(index);
+        currMonsterPositions.replace(index, oldPosition, newPosition);
+    }
+    
 }

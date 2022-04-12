@@ -15,6 +15,12 @@ public abstract class Cell {
     public char getSymbol() {
         return symbol;
     }
+    
+    // Will not get overriden by getSymbol method of the child Cell classes
+    // For LOV, will prevent a cell from being displayed with the Hero or Monster symbol
+    public char getIcon() {
+    	return symbol;
+    }
 
     public char updateSymbol(char newSymbol) {
         this.symbol = newSymbol;
