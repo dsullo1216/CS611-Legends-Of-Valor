@@ -176,6 +176,9 @@ public class LegendsOfValorMap implements Map {
             case ("Koulou"): {
                 return (KoulouCell) result;
             }
+            case ("Nexus"): {
+            	return (NexusCell) result;
+            }
             default: {
                 return (PlainCell) result;
             }

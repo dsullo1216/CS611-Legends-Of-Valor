@@ -57,7 +57,7 @@ public class LegendsOfValorGame extends RPGGame {
                 return moveSquad(newPosition, heroIndex);
             }
             case ('m'): {
-                if (map.getCell(currPosition) instanceof MarketCell) { // TODO Change this to NexusCell when it exists
+                if (map.getCell(currPosition) instanceof NexusCell) {
                     return 3;
                 }
                 else {

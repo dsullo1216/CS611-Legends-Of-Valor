@@ -13,7 +13,7 @@ public class MarketUI extends UserInterface {
 
     public int chooseAction(Scanner sc) {
         System.out.println("Please choose an option from the list below to use the shop");
-        System.out.println("0. Buy an Item \n 1. Sell an Item");
+        System.out.println("0. Buy an Item \n1. Sell an Item");
         System.out.print("Please make a choice: ");
         char actionChoice = sc.next().charAt(0);
         while (Integer.valueOf(actionChoice) < 0 && Integer.valueOf(actionChoice) > 1) {
