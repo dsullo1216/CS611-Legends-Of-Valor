@@ -127,8 +127,11 @@ public class LegendsOfValorGame extends RPGGame {
         launchGame(sc, "Legends of Valor");
         while (true) {
             for (int heroIndex = 0; heroIndex < party.size(); heroIndex++) {
-                System.out.println(party.getEntityAt(heroIndex).getName() + ", please make your move.");
+                System.out.println(party.getEntityAt(heroIndex).getName() + " (H" + heroIndex + ")" + ", please make your move.");
                 int choice = processMapInput(sc, heroIndex);
+                while (choice == -1) {
+                	choice = processMapInput(sc, heroIndex);
+                }
                 switch (choice) {
                     case (2): {
                         Monster currMonster = new Monster("name", 0, 0, 0, 0); // TODO Add method to actually get the instance of the monster nearby
@@ -176,10 +179,11 @@ public class LegendsOfValorGame extends RPGGame {
                         break;
                     }
                 }
+                map.printMap();
             }
             // TODO Call method to advance monsters one space and initiate fights if need be ONE AT A TIME
             // TODO Add method to add mana/hp buff after each round to all heros
-            map.printMap();
+            // TODO win coniditon if monsters or hero reaches opposing nexus
         }
         
     }

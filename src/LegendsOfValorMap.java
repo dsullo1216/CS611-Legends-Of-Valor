@@ -179,6 +179,9 @@ public class LegendsOfValorMap implements Map {
             case ("Nexus"): {
             	return (NexusCell) result;
             }
+            case ("Inaccessible"): {
+            	return (InaccessibleCell) result;
+            }
             default: {
                 return (PlainCell) result;
             }
@@ -188,7 +191,28 @@ public class LegendsOfValorMap implements Map {
     @Override
     public boolean moveSquad(int[] newPosition, int heroIndex) {
         // TODO Auto-generated method stub
-        return false;
+		if (newPosition[0] < 0 || newPosition[1] < 0 || newPosition[0] >= map.length || newPosition[1] >= map[0].length) {
+			System.out.println("This position is out of bounds.");
+		    return false;
+		}   
+        if (getCell(newPosition).getType().equals("Inaccessible")) {
+            System.out.println("This cell is inaccessible");
+            return false;
+        }
+        removeHero(heroIndex);
+        setHero(heroIndex, newPosition);
+        return true;    
+    }
+    
+    public void removeHero(int index) {
+        int[] heroCurrPosition = currHeroPositions.get(index);
+    	((AccessibleCell) this.map[heroCurrPosition[0]][heroCurrPosition[1]]).removeHeroSquadHere();
+    }
+    
+    public void setHero(int index, int[] newPosition) {
+        ((AccessibleCell) this.map[newPosition[0]][newPosition[1]]).setHeroSquadHere();
+        int[] oldPosition = currHeroPositions.get(index);
+        currHeroPositions.replace(index, oldPosition, newPosition);
     }
     
     // TODO Add method to move monsters
