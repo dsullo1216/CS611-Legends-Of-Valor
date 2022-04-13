@@ -17,7 +17,6 @@ public class LegendsOfValorMap implements Map {
 
     @Override
     public void printMap() {
-        // TODO Auto-generated method stub
     	for (int i = 0; i < map.length; i++) {
     		for (int j = 0; j < map.length; j++) {
         		System.out.print( map[i][j].getIcon() + " - " + map[i][j].getIcon() + " - " + map[i][j].getIcon() + "   ");
@@ -114,6 +113,37 @@ public class LegendsOfValorMap implements Map {
     		return -1;
     	}
     }
+
+    public int checkAdjacentHeros(int i, int j) {
+        if (checkIfHerosHere(i, j) != -1) {
+            return checkIfHerosHere(i, j);
+        }
+        else if (checkIfHerosHere(i, j+1) != -1) {
+            return checkIfHerosHere(i, j+1);
+        }
+        else if (checkIfHerosHere(i, j-1) != -1) {
+            return checkIfHerosHere(i, j-1);
+        }
+        else if (checkIfHerosHere(i+1, j) != -1) {
+            return checkIfHerosHere(i+1, j);
+        }
+        else if (checkIfHerosHere(i-1, j) != -1) {
+            return checkIfHerosHere(i-1, j);
+        }
+        else if (checkIfHerosHere(i+1, j+1) != -1) {
+            return checkIfHerosHere(i+1, j+1);
+        }
+        else if (checkIfHerosHere(i-1, j-1) != -1) {
+            return checkIfHerosHere(i-1, j-1);
+        }
+        else if (checkIfHerosHere(i-1, j+1) != -1) {
+            return checkIfHerosHere(i-1, j+1);
+        }
+        else if (checkIfHerosHere(i+1, j-1) != -1) {
+            return checkIfHerosHere(i+1, j-1);
+        }
+        return -1;
+    }
     
     public int[] getMonsterPosition(int monsterIndex) {
         return currMonsterPositions.get(monsterIndex);
@@ -129,6 +159,37 @@ public class LegendsOfValorMap implements Map {
         	}
     	}
     	return -1;
+    }
+
+    public int checkAdjacentMonsters(int i, int j) {
+        if (checkIfMonstersHere(i, j) != -1) {
+            return checkIfMonstersHere(i, j);
+        }
+        else if (checkIfMonstersHere(i, j+1) != -1) {
+            return checkIfMonstersHere(i, j+1);
+        }
+        else if (checkIfMonstersHere(i, j-1) != -1) {
+            return checkIfMonstersHere(i, j-1);
+        }
+        else if (checkIfMonstersHere(i+1, j) != -1) {
+            return checkIfMonstersHere(i+1, j);
+        }
+        else if (checkIfMonstersHere(i-1, j) != -1) {
+            return checkIfMonstersHere(i-1, j);
+        }
+        else if (checkIfMonstersHere(i+1, j+1) != -1) {
+            return checkIfMonstersHere(i+1, j+1);
+        }
+        else if (checkIfMonstersHere(i-1, j-1) != -1) {
+            return checkIfMonstersHere(i-1, j-1);
+        }
+        else if (checkIfMonstersHere(i-1, j+1) != -1) {
+            return checkIfMonstersHere(i-1, j+1);
+        }
+        else if (checkIfMonstersHere(i+1, j-1) != -1) {
+            return checkIfMonstersHere(i+1, j-1);
+        }
+        return -1;
     }
     
     // Construct the string that each cell would contain to show which heroes and monsters are there
@@ -187,7 +248,6 @@ public class LegendsOfValorMap implements Map {
 
     @Override
     public boolean moveSquad(int[] newPosition, int heroIndex) {
-        // TODO Auto-generated method stub
 		if (newPosition[0] < 0 || newPosition[1] < 0 || newPosition[0] >= map.length || newPosition[1] >= map[0].length) {
 			System.out.println("This position is out of bounds.");
 		    return false;
@@ -231,7 +291,6 @@ public class LegendsOfValorMap implements Map {
     
     // returns true if monster has reached hero nexus (win)
     public boolean moveMonster(int[] newPosition, int monsterIndex) {
-    // TODO Add method to move monsters
     	boolean monsterWin = false;
     	if (getCell(newPosition).getType().equals("Nexus") && newPosition[0] == 7) {
             monsterWin = true;
