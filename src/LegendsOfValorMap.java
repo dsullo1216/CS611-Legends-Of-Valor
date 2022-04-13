@@ -123,15 +123,12 @@ public class LegendsOfValorMap implements Map {
     // or -1 if no monsters are there
     public int checkIfMonstersHere(int i, int j) {
     	int[] currentCell = {i,j};
-    	if ( Arrays.equals(getMonsterPosition(0), currentCell) ) {
-    		return 0;
-    	} else if ( Arrays.equals(getMonsterPosition(1), currentCell) ) {
-    		return 1;
-    	} else if ( Arrays.equals(getMonsterPosition(2), currentCell) ) {
-    		return 2;
-    	} else {
-    		return -1;
+    	for (int index = 0; index < currMonsterPositions.size(); index ++) {
+        	if ( Arrays.equals(getMonsterPosition(index), currentCell) ) {
+        		return index;
+        	}
     	}
+    	return -1;
     }
     
     // Construct the string that each cell would contain to show which heroes and monsters are there
