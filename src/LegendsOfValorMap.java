@@ -196,6 +196,19 @@ public class LegendsOfValorMap implements Map {
             System.out.println("This cell is inaccessible");
             return false;
         }
+        if ( anyHeroInCell(newPosition[0], newPosition[1]) ) {
+        	if (newPosition[1] == 0 || newPosition[1] == 3 || newPosition[1] == 6) {
+        		if ( anyHeroInCell(newPosition[0], newPosition[1] + 1) ) 
+        			return false;
+            	System.out.println("Another hero is at that space, moving you over one!");
+    			newPosition[1]++;
+        	} else if (newPosition[1] == 1 || newPosition[1] == 4 || newPosition[1] == 7) {
+        		if ( anyHeroInCell(newPosition[0], newPosition[1] - 1) ) 
+        			return false;
+            	System.out.println("Another hero is at that space, moving you over one!");
+        		newPosition[1]--;
+        	}
+        }
         removeHero(heroIndex);
         setHero(heroIndex, newPosition);
         return true;    
@@ -212,15 +225,20 @@ public class LegendsOfValorMap implements Map {
         currHeroPositions.replace(index, oldPosition, newPosition);
     }
     
+    public boolean anyHeroInCell(int i, int j) {
+    	return (checkIfHerosHere(i,j) != -1);
+    }
+    
     // returns true if monster has reached hero nexus (win)
     public boolean moveMonster(int[] newPosition, int monsterIndex) {
     // TODO Add method to move monsters
+    	boolean monsterWin = false;
     	if (getCell(newPosition).getType().equals("Nexus") && newPosition[0] == 7) {
-            return true;
+            monsterWin = true;
         }
 	    removeMonster(monsterIndex);
 	    setMonster(monsterIndex, newPosition);
-	    return false;    
+	    return monsterWin;    
     }
     
     public void removeMonster(int index) {

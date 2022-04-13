@@ -5,6 +5,9 @@ public class LegendsOfValorGame extends RPGGame {
 
     private HashMap<Integer, int[]> heroSpawns;
     private HashMap<Integer, int[]> monsterSpawns;
+    
+//    public static final String ANSI_RESET = "\u001B[0m";
+//    public static final String ANSI_RED = "\u001B[31m";
 
     public LegendsOfValorGame() throws IOException {
         this.map = new LegendsOfValorMap();
@@ -61,8 +64,9 @@ public class LegendsOfValorGame extends RPGGame {
                     return 3;
                 }
                 else {
-                    System.out.println("Your location does not have a market. Please go to a market to shop.");
-                    return -1;
+//                	System.out.println(ANSI_RED + "Your location does not have a market. Please go to a market to shop." + ANSI_RESET);
+                	System.out.println("Your location does not have a market. Please go to a market to shop.");
+                	return -1;                
                 }
             }
             case ('e'): {
@@ -96,7 +100,7 @@ public class LegendsOfValorGame extends RPGGame {
             // TODO Check for instance of buff cells and call method to apply buffs 
             return 1;
         }
-        System.out.println("The tile you are trying to reach is either out of the map or inaccessible. Please try again.");
+        System.out.println("The tile you are trying to reach is either out of the map, full, or inaccessible. Please try again.");
         return -1;
     }
 
@@ -112,7 +116,7 @@ public class LegendsOfValorGame extends RPGGame {
             System.out.print("Invalid input please try again: ");
             actionChoice = sc.next().charAt(0);
         }
-        int choice = Integer.valueOf(actionChoice);
+        int choice = Character.getNumericValue(actionChoice);
         int currLane = ((LegendsOfValorMap) map).getLane(((LegendsOfValorMap) map).getHeroPosition(heroIndex)[1]);
         if (choice == currLane) {
             System.out.println("You cannot teleport to the lane that you are already in");
@@ -140,7 +144,7 @@ public class LegendsOfValorGame extends RPGGame {
                         if (!battleWindow.launchInterface(sc)) {
                             System.out.println("Your hero has returned to their nexus after being killed");
                             // TODO reset the hero's health/mana
-                            moveSquad(heroSpawns.get(heroIndex), heroIndex);
+                            returnToNexus(heroIndex);
                         }
                         else {
                             // TODO call method to move monster back to its nexus
@@ -199,6 +203,7 @@ public class LegendsOfValorGame extends RPGGame {
             // TODO Add method to add mana/hp buff after each round to all heros
             // TODO win condition if monster or hero reaches opposing nexus
         }
+        System.out.println("A winner has been declared! Good game!");
         
     }
     
