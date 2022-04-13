@@ -167,19 +167,23 @@ public class LegendsOfValorGame extends RPGGame {
                     case (3): {
                         MarketUI marketWindow = new MarketUI(party, (MarketCell) map.getCell(((LegendsOfValorMap)map).getHeroPosition(heroIndex))); 
                         marketWindow.launchInterface(sc);
+                        heroIndex--; //allow the hero to do more in their turn
                         break;
                     }
                     case (4): {
                         System.out.println("\n Your party is: " + "\n" + party.toString());
+                        heroIndex--; //allow the hero to do more in their turn
                         break;
                     }
                     case (5): {
                         UserInventoryUI inventoryCheck = new UserInventoryUI(party);
                         inventoryCheck.launchInterface(sc);
+                        heroIndex--; //allow the hero to do more in their turn
                         break;
                     }
                     case (6): {
                         printHelpMessages();
+                        heroIndex--; //allow the hero to do more in their turn
                         break;
                     }
                     case (7): {
@@ -212,8 +216,12 @@ public class LegendsOfValorGame extends RPGGame {
                 int[] currPosition = ((LegendsOfValorMap)map).getMonsterPosition(monsterIndex);
                 int[] newPosition = new int[] {currPosition[0]+1, currPosition[1]};
                 noWinner = !((LegendsOfValorMap)map).moveMonster(newPosition, monsterIndex);
+                System.out.println("Monster " + monsterIndex + " has advanced! Be careful!"); 
                 int nearbyHero = ((LegendsOfValorMap) map).checkAdjacentHeros(newPosition[0], newPosition[1]);
                 if (nearbyHero != -1) {
+                	map.printMap();
+                	System.out.println();
+                    currMonster = (Monster) hoard.getEntityAt(monsterIndex);
                     BattleUI battleWindow = new BattleUI((Hero) party.getEntityAt(nearbyHero), currMonster);
                     if (!battleWindow.launchInterface(sc)) {
                         System.out.println("Your hero has returned to their nexus after being killed");
@@ -223,8 +231,6 @@ public class LegendsOfValorGame extends RPGGame {
                         currMonster.updateIsDead();
                     }
 
-                }
-                System.out.println("Monster " + monsterIndex + " has advanced! Be careful!"); 
                 }
             }
             
@@ -236,7 +242,7 @@ public class LegendsOfValorGame extends RPGGame {
             map.printMap();
         }
         System.out.println("A winner has been declared! Good game!");
-        
+        }
     }
     
     // Every round, allow the heroes to regain 10% of their hp and 10% of their mana.
