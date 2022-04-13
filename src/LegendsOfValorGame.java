@@ -160,7 +160,7 @@ public class LegendsOfValorGame extends RPGGame {
                             returnToNexus(heroIndex);
                         }
                         else {
-                            ((LegendsOfValorMap)map).moveMonster(monsterSpawns.get(currMonsterIndex), currMonsterIndex);
+                            currMonster.updateIsDead();
                         }
                         break;
                     }
@@ -200,23 +200,32 @@ public class LegendsOfValorGame extends RPGGame {
                 map.printMap();
             }
             for (int monsterIndex=0; monsterIndex < monsterSpawns.size(); monsterIndex++) {
+                Monster currMonster = (Monster) hoard.getEntityAt(monsterIndex);
+                if (currMonster.getIsDead() && currMonster.getRoundsDead() == 8) {
+                    currMonster.updateIsDead();
+                    ((LegendsOfValorMap)map).moveMonster(monsterSpawns.get(monsterIndex), monsterIndex);
+                }
+                else if (currMonster.getIsDead()) {
+                    currMonster.updateRoundsDead(currMonster.getRoundsDead()+1);
+                }
+                else {
                 int[] currPosition = ((LegendsOfValorMap)map).getMonsterPosition(monsterIndex);
                 int[] newPosition = new int[] {currPosition[0]+1, currPosition[1]};
                 noWinner = !((LegendsOfValorMap)map).moveMonster(newPosition, monsterIndex);
                 int nearbyHero = ((LegendsOfValorMap) map).checkAdjacentHeros(newPosition[0], newPosition[1]);
                 if (nearbyHero != -1) {
-                    Monster currMonster = (Monster) hoard.getEntityAt(monsterIndex);
                     BattleUI battleWindow = new BattleUI((Hero) party.getEntityAt(nearbyHero), currMonster);
                     if (!battleWindow.launchInterface(sc)) {
                         System.out.println("Your hero has returned to their nexus after being killed");
                         returnToNexus(nearbyHero);
                     }
                     else {
-                        ((LegendsOfValorMap)map).moveMonster(monsterSpawns.get(monsterIndex), monsterIndex);
+                        currMonster.updateIsDead();
                     }
 
                 }
                 System.out.println("Monster " + monsterIndex + " has advanced! Be careful!"); 
+                }
             }
             
             // HP and Mana regeneration after each round for all heros
