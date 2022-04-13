@@ -13,6 +13,7 @@ public class Hero extends Entity {
     protected Weapon weapon;
     protected Armor armor;
     protected Inventory inventory;
+    protected int tempBoost;
 
     public Hero(String name, int mana, int strength, int agility, int dexterity, int wallet, int level) throws IOException {
         this.name = name;
@@ -27,6 +28,7 @@ public class Hero extends Entity {
         this.weapon = (Weapon) ReadFiles.ListOfItems()[6];
         this.armor = (Armor) ReadFiles.ListOfItems()[0];
         this.inventory = new Inventory(10);
+        this.tempBoost = 0;
     }
 
     public String toString() {
@@ -139,6 +141,15 @@ public class Hero extends Entity {
 
     public Inventory getInventory() {
         return inventory;
+    }
+    
+    public int getTempBoost() {
+        return tempBoost;
+    }
+
+    public int updateTempBoost(int newTempBoost) {
+        this.tempBoost = newTempBoost;
+        return newTempBoost;
     }
 
     public void usePotion(Potion potion) {

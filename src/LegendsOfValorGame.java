@@ -95,9 +95,18 @@ public class LegendsOfValorGame extends RPGGame {
     }
 
     public int moveSquad (int[] newPosition, int heroIndex) {
-        if (map.moveSquad(newPosition, heroIndex)) {
+        int[] oldPosition = ((LegendsOfValorMap)map).getHeroPosition(heroIndex).clone();
+    	if (map.moveSquad(newPosition, heroIndex)) {
             // TODO Add method to check for adjacent monster; if there is a monster return 2
-            // TODO Check for instance of buff cells and call method to apply buffs 
+        	
+        	// Take away the boost from the old cell
+        	if (map.getCell(oldPosition) instanceof BuffCell) {
+        		((BuffCell) map.getCell(oldPosition)).revertBoostedStat( (Hero) party.getEntityAt(heroIndex));
+        	}	
+        	// Apply new boost based on the new cell 
+        	if (map.getCell(newPosition) instanceof BuffCell) {
+        		((BuffCell) map.getCell(newPosition)).boostStat( (Hero) party.getEntityAt(heroIndex));
+        	}
             return 1;
         }
         System.out.println("The tile you are trying to reach is either out of the map, full, or inaccessible. Please try again.");
@@ -184,7 +193,7 @@ public class LegendsOfValorGame extends RPGGame {
                         break;
                     }
                 }
-                map.printMap();
+                // map.printMap();
             }
             for (int monsterIndex=0; monsterIndex < monsterSpawns.size(); monsterIndex++) {
             	// NEED to check if monster will attack the hero
