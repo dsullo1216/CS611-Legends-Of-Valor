@@ -207,6 +207,7 @@ public class LegendsOfValorGame extends RPGGame {
                 Monster currMonster = (Monster) hoard.getEntityAt(monsterIndex);
                 if (currMonster.getIsDead() && currMonster.getRoundsDead() == 8) {
                     currMonster.updateIsDead();
+                    currMonster.updateRoundsDead(0);
                     ((LegendsOfValorMap)map).moveMonster(monsterSpawns.get(monsterIndex), monsterIndex);
                 }
                 else if (currMonster.getIsDead()) {
