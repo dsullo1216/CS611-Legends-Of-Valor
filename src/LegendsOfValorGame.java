@@ -5,6 +5,9 @@ public class LegendsOfValorGame extends RPGGame {
 
     private HashMap<Integer, int[]> heroSpawns;
     private HashMap<Integer, int[]> monsterSpawns;
+    
+//    public static final String ANSI_RESET = "\u001B[0m";
+//    public static final String ANSI_RED = "\u001B[31m";
 
     public LegendsOfValorGame() throws IOException {
         this.map = new LegendsOfValorMap();
@@ -61,8 +64,9 @@ public class LegendsOfValorGame extends RPGGame {
                     return 3;
                 }
                 else {
-                    System.out.println("Your location does not have a market. Please go to a market to shop.");
-                    return -1;
+//                	System.out.println(ANSI_RED + "Your location does not have a market. Please go to a market to shop." + ANSI_RESET);
+                	System.out.println("Your location does not have a market. Please go to a market to shop.");
+                	return -1;                
                 }
             }
             case ('e'): {
@@ -91,12 +95,21 @@ public class LegendsOfValorGame extends RPGGame {
     }
 
     public int moveSquad (int[] newPosition, int heroIndex) {
-        if (map.moveSquad(newPosition, heroIndex)) {
+        int[] oldPosition = ((LegendsOfValorMap)map).getHeroPosition(heroIndex).clone();
+    	if (map.moveSquad(newPosition, heroIndex)) {
             // TODO Add method to check for adjacent monster; if there is a monster return 2
-            // TODO Check for instance of buff cells and call method to apply buffs 
+        	
+        	// Take away the boost from the old cell
+        	if (map.getCell(oldPosition) instanceof BuffCell) {
+        		((BuffCell) map.getCell(oldPosition)).revertBoostedStat( (Hero) party.getEntityAt(heroIndex));
+        	}	
+        	// Apply new boost based on the new cell 
+        	if (map.getCell(newPosition) instanceof BuffCell) {
+        		((BuffCell) map.getCell(newPosition)).boostStat( (Hero) party.getEntityAt(heroIndex));
+        	}
             return 1;
         }
-        System.out.println("The tile you are trying to reach is either out of the map or inaccessible. Please try again.");
+        System.out.println("The tile you are trying to reach is either out of the map, full, or inaccessible. Please try again.");
         return -1;
     }
 
@@ -112,7 +125,7 @@ public class LegendsOfValorGame extends RPGGame {
             System.out.print("Invalid input please try again: ");
             actionChoice = sc.next().charAt(0);
         }
-        int choice = Integer.valueOf(actionChoice);
+        int choice = Character.getNumericValue(actionChoice);
         int currLane = ((LegendsOfValorMap) map).getLane(((LegendsOfValorMap) map).getHeroPosition(heroIndex)[1]);
         if (choice == currLane) {
             System.out.println("You cannot teleport to the lane that you are already in");
@@ -140,7 +153,7 @@ public class LegendsOfValorGame extends RPGGame {
                         if (!battleWindow.launchInterface(sc)) {
                             System.out.println("Your hero has returned to their nexus after being killed");
                             // TODO reset the hero's health/mana
-                            moveSquad(heroSpawns.get(heroIndex), heroIndex);
+                            returnToNexus(heroIndex);
                         }
                         else {
                             // TODO call method to move monster back to its nexus
@@ -193,13 +206,27 @@ public class LegendsOfValorGame extends RPGGame {
                 	System.out.println("Monster " + monsterIndex + " has advanced! Be careful!");
                 }
             }
+            
+            // HP and Mana regeneration after each round for all heros
+            heroesRegain();
+
+            
             System.out.println();
             map.printMap();
             // TODO Call method to advance monsters one space and initiate fights if need be ONE AT A TIME
-            // TODO Add method to add mana/hp buff after each round to all heros
             // TODO win condition if monster or hero reaches opposing nexus
         }
+        System.out.println("A winner has been declared! Good game!");
         
+    }
+    
+    // Every round, allow the heroes to regain 10% of their hp and 10% of their mana.
+    public void heroesRegain() {
+        for (int heroIndex = 0; heroIndex < party.size(); heroIndex++) {
+        	Hero heroToRegain = (Hero) party.getEntityAt(heroIndex);
+        	heroToRegain.updateHP( (int) (heroToRegain.getHP() * 1.10) );
+        	heroToRegain.updateMana( (int) (heroToRegain.getMana() * 1.10) );
+        }
     }
     
 }
