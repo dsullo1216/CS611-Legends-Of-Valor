@@ -159,7 +159,7 @@ public class BattleUI extends UserInterface {
                 currHero.updateHP((int) (currHero.getHP() - damageDealt));
                 System.out.println("========================================================");
                 System.out.println("The monster successfully attacked you!");
-                System.out.println(currMonster.getName() + " dealt " + damageDealt + "damage to " + currHero.getName());
+                System.out.println(currMonster.getName() + " dealt " + damageDealt + " damage to " + currHero.getName());
                 System.out.println("========================================================");
                 if (currHero.getHP() < 0) {
                     System.out.println("The monster knocked out your current hero!");
