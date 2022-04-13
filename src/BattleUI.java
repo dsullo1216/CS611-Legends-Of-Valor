@@ -190,7 +190,7 @@ public class BattleUI extends UserInterface {
     private boolean nextHero() {
         int nextHeroIndex = party.nextAlive();
         if (nextHeroIndex == -1) {
-            System.out.println("Your entire party has been eliminated and you've lost the game.");
+            System.out.println("Your entire party has been eliminated and you've lost the battle.");
             return false;
         }
         currHero = (Hero) party.getEntityAt(nextHeroIndex);
