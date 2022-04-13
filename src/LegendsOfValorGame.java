@@ -193,7 +193,7 @@ public class LegendsOfValorGame extends RPGGame {
                         break;
                     }
                 }
-                // map.printMap();
+                map.printMap();
             }
             for (int monsterIndex=0; monsterIndex < monsterSpawns.size(); monsterIndex++) {
             	// NEED to check if monster will attack the hero
@@ -206,14 +206,27 @@ public class LegendsOfValorGame extends RPGGame {
                 	System.out.println("Monster " + monsterIndex + " has advanced! Be careful!");
                 }
             }
+            
+            // HP and Mana regeneration after each round for all heros
+            heroesRegain();
+
+            
             System.out.println();
             map.printMap();
             // TODO Call method to advance monsters one space and initiate fights if need be ONE AT A TIME
-            // TODO Add method to add mana/hp buff after each round to all heros
             // TODO win condition if monster or hero reaches opposing nexus
         }
         System.out.println("A winner has been declared! Good game!");
         
+    }
+    
+    // Every round, allow the heroes to regain 10% of their hp and 10% of their mana.
+    public void heroesRegain() {
+        for (int heroIndex = 0; heroIndex < party.size(); heroIndex++) {
+        	Hero heroToRegain = (Hero) party.getEntityAt(heroIndex);
+        	heroToRegain.updateHP( (int) (heroToRegain.getHP() * 1.10) );
+        	heroToRegain.updateMana( (int) (heroToRegain.getMana() * 1.10) );
+        }
     }
     
 }
