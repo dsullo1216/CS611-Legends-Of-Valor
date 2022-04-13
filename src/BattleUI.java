@@ -213,15 +213,13 @@ public class BattleUI extends UserInterface {
     }
 
     private boolean finishBattle(boolean HerosWon) {
-        if (HerosWon) {
-            for (int i = 0; i < party.size(); i++) {
-                if (party.getEntityAt(i).getHP() < 0) {
-                    party.getEntityAt(i).updateHP(party.getEntityAt(i).getLevel() * 50);
-                }
-                else {
-                    ((Hero) party.getEntityAt(i)).updateWallet( ((Hero) party.getEntityAt(i)).getWallet() + 500);
-                    ((Hero) party.getEntityAt(i)).updateEXP( ((Hero) party.getEntityAt(i)).getEXP() + 2);
-                }
+        for (int i = 0; i < party.size(); i++) {
+            if (party.getEntityAt(i).getHP() < 0) {
+                party.getEntityAt(i).updateHP(party.getEntityAt(i).getLevel() * 50);
+            }
+            if (HerosWon) {
+                ((Hero) party.getEntityAt(i)).updateWallet( ((Hero) party.getEntityAt(i)).getWallet() + 500);
+                ((Hero) party.getEntityAt(i)).updateEXP( ((Hero) party.getEntityAt(i)).getEXP() + 2);
             }
         }
         return HerosWon;
