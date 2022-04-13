@@ -316,6 +316,7 @@ public class LegendsOfValorMap implements Map {
     
     public void removeMonster(int index) {
         int[] monsterCurrPosition = currMonsterPositions.get(index);
+        currMonsterPositions.replace(index, monsterCurrPosition, new int[] {-1, -1});
     	((AccessibleCell) this.map[monsterCurrPosition[0]][monsterCurrPosition[1]]).removeMonsterSquadHere();
     }
     

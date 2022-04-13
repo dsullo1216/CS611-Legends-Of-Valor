@@ -215,6 +215,7 @@ public class LegendsOfValorGame extends RPGGame {
             for (int monsterIndex=0; monsterIndex < monsterSpawns.size(); monsterIndex++) {
                 Monster currMonster = (Monster) hoard.getEntityAt(monsterIndex);
                 if (currMonster.getIsDead() && currMonster.getRoundsDead() == 8) {
+                    System.out.println("The monster has spawned back in! Be prepared!");
                     currMonster.updateIsDead();
                     currMonster.updateRoundsDead(0);
                     ((LegendsOfValorMap)map).setMonster(monsterIndex, monsterSpawns.get(monsterIndex));
@@ -238,6 +239,7 @@ public class LegendsOfValorGame extends RPGGame {
                         returnToNexus(nearbyHero);
                     }
                     else {
+                        System.out.println("The monster has been killed and will not spawn in for 8 rounds!");
                         ((LegendsOfValorMap) map).removeMonster(monsterIndex);
                         currMonster.updateIsDead();
                     }
