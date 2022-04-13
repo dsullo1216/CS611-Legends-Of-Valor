@@ -160,6 +160,7 @@ public class LegendsOfValorGame extends RPGGame {
                             returnToNexus(heroIndex);
                         }
                         else {
+                            ((LegendsOfValorMap) map).removeMonster(currMonsterIndex);
                             currMonster.updateIsDead();
                         }
                         break;
@@ -208,7 +209,7 @@ public class LegendsOfValorGame extends RPGGame {
                 if (currMonster.getIsDead() && currMonster.getRoundsDead() == 8) {
                     currMonster.updateIsDead();
                     currMonster.updateRoundsDead(0);
-                    ((LegendsOfValorMap)map).moveMonster(monsterSpawns.get(monsterIndex), monsterIndex);
+                    ((LegendsOfValorMap)map).setMonster(monsterIndex, monsterSpawns.get(monsterIndex));
                 }
                 else if (currMonster.getIsDead()) {
                     currMonster.updateRoundsDead(currMonster.getRoundsDead()+1);
@@ -229,6 +230,7 @@ public class LegendsOfValorGame extends RPGGame {
                         returnToNexus(nearbyHero);
                     }
                     else {
+                        ((LegendsOfValorMap) map).removeMonster(monsterIndex);
                         currMonster.updateIsDead();
                     }
 
