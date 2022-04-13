@@ -256,19 +256,6 @@ public class LegendsOfValorMap implements Map {
             System.out.println("This cell is inaccessible");
             return false;
         }
-        if ( anyHeroInCell(newPosition[0], newPosition[1]) ) {
-        	if (newPosition[1] == 0 || newPosition[1] == 3 || newPosition[1] == 6) {
-        		if ( anyHeroInCell(newPosition[0], newPosition[1] + 1) ) 
-        			return false;
-            	System.out.println("Another hero is at that space, moving you over one!");
-    			newPosition[1]++;
-        	} else if (newPosition[1] == 1 || newPosition[1] == 4 || newPosition[1] == 7) {
-        		if ( anyHeroInCell(newPosition[0], newPosition[1] - 1) ) 
-        			return false;
-            	System.out.println("Another hero is at that space, moving you over one!");
-        		newPosition[1]--;
-        	}
-        }
         removeHero(heroIndex);
         setHero(heroIndex, newPosition);
         return true;    
@@ -287,6 +274,33 @@ public class LegendsOfValorMap implements Map {
     
     public boolean anyHeroInCell(int i, int j) {
     	return (checkIfHerosHere(i,j) != -1);
+    }
+    
+    public int[] moveOverCell(int[] desiredPosition) {
+    	int[] newPosition = desiredPosition.clone();
+    	
+        if ( anyHeroInCell(desiredPosition[0], desiredPosition[1]) ) {
+        	if (desiredPosition[1] == 0 || desiredPosition[1] == 3 || desiredPosition[1] == 6) {
+        		if ( anyHeroInCell(desiredPosition[0], desiredPosition[1] + 1) ) {
+        			// Both cells of this row have heroes already
+        			newPosition[0] = -1;
+        			newPosition[1] = -1;
+        		} else{
+        			System.out.println("Another hero is at that space, moving you over one to the right!");
+                	newPosition[1]++;
+        		}
+        	} else if (desiredPosition[1] == 1 || desiredPosition[1] == 4 || desiredPosition[1] == 7) {
+        		if ( anyHeroInCell(desiredPosition[0], desiredPosition[1] - 1) ) {
+        			// Both cells of this row have heroes already
+        			newPosition[0] = -1;
+    				newPosition[1] = -1;
+        		} else {
+        			System.out.println("Another hero is at that space, moving you over one to the left!");
+        			newPosition[1]--;
+        		}
+        	}
+        }
+        return newPosition; 
     }
     
     // returns true if monster has reached hero nexus (win)

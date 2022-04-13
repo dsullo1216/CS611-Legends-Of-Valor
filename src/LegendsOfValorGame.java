@@ -99,6 +99,14 @@ public class LegendsOfValorGame extends RPGGame {
 
     public int moveSquad (int[] newPosition, int heroIndex) {
         int[] oldPosition = ((LegendsOfValorMap)map).getHeroPosition(heroIndex).clone();
+        int[] shiftedOver = ((LegendsOfValorMap)map).moveOverCell(newPosition);
+        if (shiftedOver[0] == -1 && shiftedOver[1] == -1) {
+            System.out.println("The tile you are trying to reach is either out of the map, full, or inaccessible. Please try again.");
+        	return -1;
+        }
+        else {
+        	newPosition = shiftedOver;
+        }
     	if (map.moveSquad(newPosition, heroIndex)) {
             if (((LegendsOfValorMap) map).checkAdjacentMonsters(newPosition[0], newPosition[1]) != -1) {
                 return 2;
