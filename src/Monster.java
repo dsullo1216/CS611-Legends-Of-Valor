@@ -5,6 +5,8 @@ public class Monster extends Entity {
     protected int damage;
     protected int defense;
     protected int dodgeChance;
+    protected boolean isDead;
+    protected int roundsDead;
 
     public Monster(String name, int level, int damage, int defense, int dodgeChance) {
         this.name = name;
@@ -13,6 +15,8 @@ public class Monster extends Entity {
         this.defense = defense;
         this.dodgeChance = dodgeChance;
         this.hp = level * 100;
+        this.isDead = false;
+        this.roundsDead = 0;
     }
 
     public String toString() {
@@ -70,6 +74,24 @@ public class Monster extends Entity {
     public int updateDodgeChance(int newDodgeChance) {
         this.dodgeChance = newDodgeChance;
         return dodgeChance;
+    }
+
+    public boolean getIsDead() {
+        return isDead;
+    }
+
+    public boolean updateIsDead() {
+        this.isDead = !isDead;
+        return isDead;
+    }
+
+    public int getRoundsDead() {
+        return roundsDead;
+    }
+
+    public int updateRoundsDead(int newRoundsDead) {
+        this.roundsDead = newRoundsDead;
+        return roundsDead;
     }
 
     @Override
