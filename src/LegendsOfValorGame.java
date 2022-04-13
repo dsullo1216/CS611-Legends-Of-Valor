@@ -8,6 +8,8 @@ public class LegendsOfValorGame extends RPGGame {
 
     public LegendsOfValorGame() throws IOException {
         this.map = new LegendsOfValorMap();
+        this.heroSpawns = new HashMap<Integer, int[]>();
+        this.monsterSpawns = new HashMap<Integer, int[]>();
         setSpawns();
     }
 
@@ -55,7 +57,7 @@ public class LegendsOfValorGame extends RPGGame {
                 return moveSquad(newPosition, heroIndex);
             }
             case ('m'): {
-                if (map.getCell(currPosition) instanceof MarketCell) { // TODO Change this to NexusCell when it exists
+                if (map.getCell(currPosition) instanceof NexusCell) {
                     return 3;
                 }
                 else {
@@ -103,7 +105,7 @@ public class LegendsOfValorGame extends RPGGame {
     }
 
     public int teleport (Scanner sc, int heroIndex) {
-        System.out.println("Which lane would you like to teleport to? \n 0. Top Lane \n 1. Mid Lane \n 2. Bot Lane");
+        System.out.println("Which lane would you like to teleport to? \n 0. Top Lane \n 1. Middle Lane \n 2. Bottom Lane");
         System.out.print("Please enter the number for which lane you would like to teleport to: ");
         char actionChoice = sc.next().charAt(0);
         while (Integer.valueOf(actionChoice) < 0 && Integer.valueOf(actionChoice) > 2) {
@@ -121,12 +123,16 @@ public class LegendsOfValorGame extends RPGGame {
 
     @Override
     public void playGame(Scanner sc) throws IOException {
-        System.out.println("PLEASE CHOOSE 3 CHAMPIONS WHEN STARTING THE GAME IN ORDER TO PROPERLY RUN");
+        // System.out.println("PLEASE CHOOSE 3 CHAMPIONS WHEN STARTING THE GAME IN ORDER TO PROPERLY RUN");
         launchGame(sc, "Legends of Valor");
-        while (true) {
+        boolean noWinner = true;
+        while (noWinner) {
             for (int heroIndex = 0; heroIndex < party.size(); heroIndex++) {
-                System.out.println(party.getEntityAt(heroIndex).getName() + ", please make your move.");
+                System.out.println(party.getEntityAt(heroIndex).getName() + " (H" + heroIndex + ")" + ", please make your move.");
                 int choice = processMapInput(sc, heroIndex);
+                while (choice == -1) {
+                	choice = processMapInput(sc, heroIndex);
+                }
                 switch (choice) {
                     case (2): {
                         Monster currMonster = new Monster("name", 0, 0, 0, 0); // TODO Add method to actually get the instance of the monster nearby
@@ -174,10 +180,24 @@ public class LegendsOfValorGame extends RPGGame {
                         break;
                     }
                 }
+                map.printMap();
             }
+            for (int monsterIndex=0; monsterIndex < monsterSpawns.size(); monsterIndex++) {
+            	// NEED to check if monster will attack the hero
+                if (false) {
+                	continue;
+                } else {
+                    int[] currPosition = ((LegendsOfValorMap)map).getMonsterPosition(monsterIndex);
+                	int[] newPosition = new int[] {currPosition[0]+1, currPosition[1]};
+                	noWinner = !((LegendsOfValorMap)map).moveMonster(newPosition, monsterIndex);
+                	System.out.println("Monster " + monsterIndex + " has advanced! Be careful!");
+                }
+            }
+            System.out.println();
+            map.printMap();
             // TODO Call method to advance monsters one space and initiate fights if need be ONE AT A TIME
             // TODO Add method to add mana/hp buff after each round to all heros
-            map.printMap();
+            // TODO win condition if monster or hero reaches opposing nexus
         }
         
     }

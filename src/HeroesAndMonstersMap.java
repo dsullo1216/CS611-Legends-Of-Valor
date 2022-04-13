@@ -104,4 +104,5 @@ public class HeroesAndMonstersMap implements Map {
         return true;
     }
     
+
 }
