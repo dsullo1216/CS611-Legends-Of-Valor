@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.Random;
 
+// Extension of the map class that includes specific functionality needed for Heroes and Monsters
 public class HeroesAndMonstersMap implements Map {
 
     private Random rand = new Random();

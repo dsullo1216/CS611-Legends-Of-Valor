@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.*;
 
+// Extension of the RPGGame class that implements the additional methods needed for Legends of Valor
 public class LegendsOfValorGame extends RPGGame {
 
     private HashMap<Integer, int[]> heroSpawns;

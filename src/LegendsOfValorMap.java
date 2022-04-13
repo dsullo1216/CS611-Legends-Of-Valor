@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.*;
 
+// Extension of the map class that includes specific functionality needed for Legends of Valor
 public class LegendsOfValorMap implements Map {
 
     private Random rand = new Random();

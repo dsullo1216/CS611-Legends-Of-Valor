@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.*;
 
+// Extension of the Game class that implements the methods needed for a Role Playing Game and to be extended by a specific game
 public abstract class RPGGame extends Game {
 
     protected Random rand = new Random();

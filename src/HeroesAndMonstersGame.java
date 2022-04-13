@@ -1,7 +1,7 @@
 import java.io.IOException;
 import java.util.*;
 
-// Extension of the Game class that implements the methods needed for Heroes and Monster
+// Extension of the RPGGame class that implements the additional methods needed for Heroes and Monster
 public class HeroesAndMonstersGame extends RPGGame {
 
     private static final double BATTLERATE = 0.25;

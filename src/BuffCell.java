@@ -1,3 +1,4 @@
+// Subclass of AccessibleCell that represents a cell where the user will receive a temporary buff if they remain for a turn
 public abstract class BuffCell extends AccessibleCell {
 
     protected String buffedStat;
