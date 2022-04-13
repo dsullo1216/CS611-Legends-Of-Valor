@@ -157,7 +157,6 @@ public class LegendsOfValorGame extends RPGGame {
                         BattleUI battleWindow = new BattleUI((Hero) party.getEntityAt(heroIndex), currMonster);
                         if (!battleWindow.launchInterface(sc)) {
                             System.out.println("Your hero has returned to their nexus after being killed");
-                            // TODO reset the hero's health/mana
                             returnToNexus(heroIndex);
                         }
                         else {
@@ -210,7 +209,6 @@ public class LegendsOfValorGame extends RPGGame {
                     BattleUI battleWindow = new BattleUI((Hero) party.getEntityAt(nearbyHero), currMonster);
                     if (!battleWindow.launchInterface(sc)) {
                         System.out.println("Your hero has returned to their nexus after being killed");
-                        // TODO reset the hero's health/mana
                         returnToNexus(nearbyHero);
                     }
                     else {
