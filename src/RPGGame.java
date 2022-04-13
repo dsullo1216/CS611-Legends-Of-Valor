@@ -4,7 +4,7 @@ import java.util.*;
 public abstract class RPGGame extends Game {
 
     protected Random rand = new Random();
-    HeroSquad party;
+    protected HeroSquad party;
 
     public void launchGame(Scanner sc, String gameName) throws IOException {
         System.out.println("Welcome to " + gameName + "!");
