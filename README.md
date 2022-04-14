@@ -8,7 +8,6 @@ dsullo@bu.edu, mpatel27@bu.edu
 
 ## Files
 ---------------------------------------------------------------------------
-<.java file /> - <1 line comment about the file />
 <Board.java> Abstract board class for implementing Board-based games. It holds a 2-D array of the Piece class and allows us to manipulate the board and check board status
 <Accessible.java> Abstract class to represent a cell where heroes can walk. Will be extended to become Battle Cells and Market Cells 
 <Armor.java> Subclass of the Item class that represents armor that can be worn by the hero.
