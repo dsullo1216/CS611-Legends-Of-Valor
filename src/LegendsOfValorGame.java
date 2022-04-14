@@ -151,6 +151,8 @@ public class LegendsOfValorGame extends RPGGame {
     public void playGame(Scanner sc) throws IOException {
         launchGame(sc, "Legends of Valor");
         boolean noWinner = true;
+        String winner = "";
+        boolean heroesWon = false;
         while (noWinner) {
             for (int heroIndex = 0; heroIndex < party.size(); heroIndex++) {
                 System.out.println(party.getEntityAt(heroIndex).getName() + " (H" + heroIndex + ")" + ", please make your move.");
@@ -212,6 +214,14 @@ public class LegendsOfValorGame extends RPGGame {
                     }
                 }
                 map.printMap();
+                heroesWon = heroWin();
+                if (heroesWon)
+                	break;
+            }
+            if (heroesWon) {
+            	noWinner = false;
+            	winner = "Heroes :)";
+            	break;
             }
             for (int monsterIndex=0; monsterIndex < monsterSpawns.size(); monsterIndex++) {
                 Monster currMonster = (Monster) hoard.getEntityAt(monsterIndex);
@@ -225,28 +235,31 @@ public class LegendsOfValorGame extends RPGGame {
                     currMonster.updateRoundsDead(currMonster.getRoundsDead()+1);
                 }
                 else {
-                int[] currPosition = ((LegendsOfValorMap)map).getMonsterPosition(monsterIndex);
-                int[] newPosition = new int[] {currPosition[0]+1, currPosition[1]};
-                noWinner = !((LegendsOfValorMap)map).moveMonster(newPosition, monsterIndex);
-                System.out.println("Monster " + monsterIndex + " has advanced! Be careful!"); 
-                int nearbyHero = ((LegendsOfValorMap) map).checkAdjacentHeros(newPosition[0], newPosition[1]);
-                if (nearbyHero != -1) {
-                	map.printMap();
-                	System.out.println();
-                    currMonster = (Monster) hoard.getEntityAt(monsterIndex);
-                    BattleUI battleWindow = new BattleUI((Hero) party.getEntityAt(nearbyHero), currMonster);
-                    if (!battleWindow.launchInterface(sc)) {
-                        System.out.println("Your hero has returned to their nexus after being killed");
-                        returnToNexus(nearbyHero);
-                    }
-                    else {
-                        System.out.println("The monster has been killed and will not spawn in for 8 rounds!");
-                        ((LegendsOfValorMap) map).removeMonster(monsterIndex);
-                        currMonster.updateIsDead();
-                    }
-
+	                int[] currPosition = ((LegendsOfValorMap)map).getMonsterPosition(monsterIndex);
+	                int[] newPosition = new int[] {currPosition[0]+1, currPosition[1]};
+	                noWinner = !((LegendsOfValorMap)map).moveMonster(newPosition, monsterIndex);
+	                if (!noWinner) {
+	                	winner = "Monsters :(";
+	                }
+	                System.out.println("Monster " + monsterIndex + " has advanced! Be careful!"); 
+	                int nearbyHero = ((LegendsOfValorMap) map).checkAdjacentHeros(newPosition[0], newPosition[1]);
+	                if (nearbyHero != -1) {
+	                	map.printMap();
+	                	System.out.println();
+	                    currMonster = (Monster) hoard.getEntityAt(monsterIndex);
+	                    BattleUI battleWindow = new BattleUI((Hero) party.getEntityAt(nearbyHero), currMonster);
+	                    if (!battleWindow.launchInterface(sc)) {
+	                        System.out.println("Your hero has returned to their nexus after being killed");
+	                        returnToNexus(nearbyHero);
+	                    }
+	                    else {
+	                        System.out.println("The monster has been killed and will not spawn in for 8 rounds!");
+	                        ((LegendsOfValorMap) map).removeMonster(monsterIndex);
+	                        currMonster.updateIsDead();
+	                    }
+	
+	                }
                 }
-            }
             
             // HP and Mana regeneration after each round for all heros
             heroesRegain();
@@ -254,9 +267,10 @@ public class LegendsOfValorGame extends RPGGame {
             
             System.out.println();
             map.printMap();
+            }
         }
         System.out.println("A winner has been declared! Good game!");
-        }
+        System.out.println("Congratulations to the " + winner);
     }
     
     // Every round, allow the heroes to regain 10% of their hp and 10% of their mana.
@@ -266,6 +280,22 @@ public class LegendsOfValorGame extends RPGGame {
         	heroToRegain.updateHP( (int) (heroToRegain.getHP() * 1.10) );
         	heroToRegain.updateMana( (int) (heroToRegain.getMana() * 1.10) );
         }
+    }
+    
+    public boolean heroWin() {
+    	int[] heroZeroPosition = ((LegendsOfValorMap) map).getHeroPosition(0);
+    	int[] heroOnePosition = ((LegendsOfValorMap) map).getHeroPosition(1);
+    	int[] heroTwoPosition = ((LegendsOfValorMap) map).getHeroPosition(2);
+    	if (checkIfInMonsterNexus(heroZeroPosition) || checkIfInMonsterNexus(heroOnePosition) || checkIfInMonsterNexus(heroTwoPosition)) {
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
+    }
+    
+    public boolean checkIfInMonsterNexus(int[] heroPosition) {
+    	return (map.getCell(heroPosition).getType().equals("Nexus") && heroPosition[0] == 0);
     }
     
 }
