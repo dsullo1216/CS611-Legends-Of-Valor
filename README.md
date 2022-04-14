@@ -6,8 +6,11 @@ David Sullo, Manish Patel
 
 dsullo@bu.edu, mpatel27@bu.edu
 
+[ID1], [ID2]
+
 ## Files
 ---------------------------------------------------------------------------
+<.java file /> - <1 line comment about the file />
 <Board.java> Abstract board class for implementing Board-based games. It holds a 2-D array of the Piece class and allows us to manipulate the board and check board status
 <Accessible.java> Abstract class to represent a cell where heroes can walk. Will be extended to become Battle Cells and Market Cells 
 <Armor.java> Subclass of the Item class that represents armor that can be worn by the hero.
@@ -55,12 +58,19 @@ dsullo@bu.edu, mpatel27@bu.edu
 <UserInventoryUI.java> Subclass of UserInterface class to represent User Interface where Users can manage their inventory. Includes all necessary methods
 <Warrior.java> Subclass of Hero to represent Warrior class. Implements specialized version of level_up
 <Weapon.java> Subclass of Items that represents Weapons that Heroes can use in battle. Implements necessary methods and additional ones
+
+
 ## Notes
 ---------------------------------------------------------------------------
+1. Files to be parsed should be stored in ConfigFiles, for parser class to
+read class
+2. Bonus Done
+3. Things instructions to note
+
 ## How to run
 ---------------------------------------------------------------------------
 1. Navigate to the main Project Directory after downloading the files
 2. Run command line from within the src folder
 3. Run the following instructions on command line:
 javac *.java
-java Main
+java Main.java
