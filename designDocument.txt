@@ -1,2 +1,3 @@
 [A brief document explaining your design evaluation, focusing on what features you felt led you to choose one implementation over another (or the hybrid approach). 
 Include a brief evaluation if (post fact) you feel your decisions were correct and if they acheived your expectations.]
+PLEASE SEE ATTACHED PDF
