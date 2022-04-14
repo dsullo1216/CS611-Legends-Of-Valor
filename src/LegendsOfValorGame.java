@@ -8,8 +8,9 @@ public class LegendsOfValorGame extends RPGGame {
     private HashMap<Integer, int[]> monsterSpawns;
     private MonsterSquad hoard;
     
-//    public static final String ANSI_RESET = "\u001B[0m";
-//    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
 
     public LegendsOfValorGame() throws IOException {
         this.map = new LegendsOfValorMap();
@@ -68,8 +69,8 @@ public class LegendsOfValorGame extends RPGGame {
                     return 3;
                 }
                 else {
-//                	System.out.println(ANSI_RED + "Your location does not have a market. Please go to a market to shop." + ANSI_RESET);
-                	System.out.println("Your location does not have a market. Please go to a market to shop.");
+                	System.out.println(ANSI_RED + "Your location does not have a market. Please go to a market to shop." + ANSI_RESET);
+//                	System.out.println("Your location does not have a market. Please go to a market to shop.");
                 	return -1;                
                 }
             }
@@ -92,7 +93,7 @@ public class LegendsOfValorGame extends RPGGame {
                 return 9;
             }
             default: {
-                System.out.println("The input you chose was invalid. Please try again.");
+            	System.out.println(ANSI_RED + "The input you chose was invalid. Please try again." + ANSI_RESET);
                 return -1;
             }
         }
@@ -102,7 +103,7 @@ public class LegendsOfValorGame extends RPGGame {
         int[] oldPosition = ((LegendsOfValorMap)map).getHeroPosition(heroIndex).clone();
         int[] shiftedOver = ((LegendsOfValorMap)map).moveOverCell(newPosition);
         if (shiftedOver[0] == -1 && shiftedOver[1] == -1) {
-            System.out.println("The tile you are trying to reach is either out of the map, full, or inaccessible. Please try again.");
+        	System.out.println(ANSI_RED + "The tile you are trying to reach is either out of the map, full, or inaccessible. Please try again." + ANSI_RESET);
         	return -1;
         }
         else {
@@ -122,7 +123,7 @@ public class LegendsOfValorGame extends RPGGame {
         	}
             return 1;
         }
-        System.out.println("The tile you are trying to reach is either out of the map, full, or inaccessible. Please try again.");
+    	System.out.println(ANSI_RED + "The tile you are trying to reach is either out of the map, full, or inaccessible. Please try again." + ANSI_RESET);
         return -1;
     }
 
@@ -135,13 +136,13 @@ public class LegendsOfValorGame extends RPGGame {
         System.out.print("Please enter the number for which lane you would like to teleport to: ");
         char actionChoice = sc.next().charAt(0);
         while (Integer.valueOf(actionChoice) < 0 && Integer.valueOf(actionChoice) > 2) {
-            System.out.print("Invalid input please try again: ");
+        	System.out.println(ANSI_RED + "Invalid input please try again: " + ANSI_RESET);
             actionChoice = sc.next().charAt(0);
         }
         int choice = Character.getNumericValue(actionChoice);
         int currLane = ((LegendsOfValorMap) map).getLane(((LegendsOfValorMap) map).getHeroPosition(heroIndex)[1]);
         if (choice == currLane) {
-            System.out.println("You cannot teleport to the lane that you are already in");
+        	System.out.println(ANSI_RED + "You cannot teleport to the lane that you are already in" + ANSI_RESET);
             return -1;
         }
         return moveSquad(heroSpawns.get(Integer.valueOf(choice)), heroIndex);
@@ -167,7 +168,7 @@ public class LegendsOfValorGame extends RPGGame {
                         Monster currMonster = (Monster) hoard.getEntityAt(currMonsterIndex);
                         BattleUI battleWindow = new BattleUI((Hero) party.getEntityAt(heroIndex), currMonster);
                         if (!battleWindow.launchInterface(sc)) {
-                            System.out.println("Your hero has returned to their nexus after being killed");
+                        	System.out.println(ANSI_GREEN + "Your hero has returned to their nexus after being killed" + ANSI_RESET);
                             returnToNexus(heroIndex);
                         }
                         else {
@@ -226,7 +227,7 @@ public class LegendsOfValorGame extends RPGGame {
             for (int monsterIndex=0; monsterIndex < monsterSpawns.size(); monsterIndex++) {
                 Monster currMonster = (Monster) hoard.getEntityAt(monsterIndex);
                 if (currMonster.getIsDead() && currMonster.getRoundsDead() == 8) {
-                    System.out.println("The monster has spawned back in! Be prepared!");
+                	System.out.println(ANSI_RED + "The monster has spawned back in! Be prepared!" + ANSI_RESET);
                     currMonster.updateIsDead();
                     currMonster.updateRoundsDead(0);
                     ((LegendsOfValorMap)map).setMonster(monsterIndex, monsterSpawns.get(monsterIndex));
@@ -241,7 +242,7 @@ public class LegendsOfValorGame extends RPGGame {
 	                if (!noWinner) {
 	                	winner = "Monsters :(";
 	                }
-	                System.out.println("Monster " + monsterIndex + " has advanced! Be careful!"); 
+                	System.out.println(ANSI_RED + "Monster " + monsterIndex + " has advanced! Be careful!" + ANSI_RESET);
 	                int nearbyHero = ((LegendsOfValorMap) map).checkAdjacentHeros(newPosition[0], newPosition[1]);
 	                if (nearbyHero != -1) {
 	                	map.printMap();
@@ -249,11 +250,11 @@ public class LegendsOfValorGame extends RPGGame {
 	                    currMonster = (Monster) hoard.getEntityAt(monsterIndex);
 	                    BattleUI battleWindow = new BattleUI((Hero) party.getEntityAt(nearbyHero), currMonster);
 	                    if (!battleWindow.launchInterface(sc)) {
-	                        System.out.println("Your hero has returned to their nexus after being killed");
+	                    	System.out.println(ANSI_GREEN + "Your hero has returned to their nexus after being killed" + ANSI_RESET);
 	                        returnToNexus(nearbyHero);
 	                    }
 	                    else {
-	                        System.out.println("The monster has been killed and will not spawn in for 8 rounds!");
+	                    	System.out.println(ANSI_GREEN + "The monster has been killed and will not spawn in for 8 rounds!" + ANSI_RESET);
 	                        ((LegendsOfValorMap) map).removeMonster(monsterIndex);
 	                        currMonster.updateIsDead();
 	                    }
@@ -269,8 +270,8 @@ public class LegendsOfValorGame extends RPGGame {
             map.printMap();
             }
         }
-        System.out.println("A winner has been declared! Good game!");
-        System.out.println("Congratulations to the " + winner);
+        System.out.println(ANSI_GREEN + "A winner has been declared! Good game!" + ANSI_RESET);
+        System.out.println(ANSI_GREEN + "Congratulations to the " + winner + ANSI_RESET);
     }
     
     // Every round, allow the heroes to regain 10% of their hp and 10% of their mana.
